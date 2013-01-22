@@ -8,15 +8,18 @@
 #
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
+#
+# Run the following command to get the correct mysql socket file.
+#   mysqladmin variables | grep socket
 development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
   database: ACM-Ladder_development
   pool: 5
-  username: root
+  username:
   password:
-  socket: /var/run/mysqld/mysqld.sock
+  socket:
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -27,9 +30,9 @@ test:
   reconnect: false
   database: ACM-Ladder_test
   pool: 5
-  username: root
+  username:
   password:
-  socket: /var/run/mysqld/mysqld.sock
+  socket:
 
 production:
   adapter: mysql2
@@ -37,6 +40,6 @@ production:
   reconnect: false
   database: ACM-Ladder_production
   pool: 5
-  username: root
+  username:
   password:
-  socket: /var/run/mysqld/mysqld.sock
+  socket:
