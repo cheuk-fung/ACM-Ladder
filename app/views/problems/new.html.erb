@@ -3,5 +3,9 @@
   <fieldset>
     <%= form.input :source, :collection => source_list %>
     <%= form.input :original_id, :label => "ID" %>
+    <%= form.input :level, :collection => 0..10 %>
+
+    <%= form.submit %>
+    <%= submit_tag "Cancel", :type => :reset %>
   </fieldset>
 <% end %>
