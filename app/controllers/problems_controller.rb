@@ -9,6 +9,7 @@ class ProblemsController < ApplicationController
 
   def create
     @problem = Problem.new(params[:problem])
+    @problem.fetch_remote
 
     if @problem.save
       redirect_to problems_url, :notice => "Problem was successfully created."
@@ -17,4 +18,6 @@ class ProblemsController < ApplicationController
       render :action => "new"
     end
   end
+
+
 end
