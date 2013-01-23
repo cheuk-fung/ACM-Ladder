@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  source: MyString
+  original_id: 1
+  level: 1
+  title: MyString
+  time_limit: 1
+  memory_limit: 1
+  description: MyText
+  input: MyText
+  output: MyText
+  sample_input: MyText
+  sample_output: MyText
+  hint: MyText
+
+two:
+  source: MyString
+  original_id: 1
+  level: 1
+  title: MyString
+  time_limit: 1
+  memory_limit: 1
+  description: MyText
+  input: MyText
+  output: MyText
+  sample_input: MyText
+  sample_output: MyText
+  hint: MyText
