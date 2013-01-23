@@ -37,4 +37,5 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
+gem 'hpricot'
 gem 'simple_form'
