@@ -1,0 +1,7 @@
+<h2>Add New Problem</h2>
+<%= simple_form_for @problem, :html => { :class => "form-horizontal" } do |form| %>
+  <fieldset>
+    <%= form.input :source, :collection => source_list %>
+    <%= form.input :original_id, :label => "ID" %>
+  </fieldset>
+<% end %>
