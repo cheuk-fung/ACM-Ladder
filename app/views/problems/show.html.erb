@@ -1,0 +1,18 @@
+<h1><%= @problem.title %></h1>
+<p>Source: <%= "#{@problem.source} #{@problem.original_id}" %></p>
+<p>Time: <%= @problem.time_limit %>MS</p>
+<p>Memory: <%= @problem.memory_limit %>K</p>
+<h2>Description</h2>
+<%= @problem.description.html_safe %>
+<h3>Input</h3>
+<%= @problem.input.html_safe %>
+<h3>Output</h3>
+<%= @problem.output.html_safe %>
+<h3>Sample Input</h3>
+<pre><%= @problem.sample_input %></pre>
+<h3>Sample Output</h3>
+<pre><%= @problem.sample_output %></pre>
+<% if @problem.hint %>
+  <h3>Hint</h3>
+  <%= @problem.hint.html_safe %>
+<% end %>

@@ -1,2 +1,12 @@
 <h1>Problem List</h1>
 <%= link_to "New Problem", new_problem_path %>
+<ul>
+  <% @problems.each do |problem| %>
+    <li>
+    <%= problem.id %>
+    <%= problem.source %>
+    <%= problem.original_id %>
+    <%= link_to problem.title, problem %>
+    </li>
+  <% end %>
+</ul>
