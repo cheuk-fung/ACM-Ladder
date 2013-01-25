@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  handle: MyString
+  level: 1
+  school: MyString
+  student_id: 1
+  college: MyString
+  major: MyString
+  mobile: MyString
+
+two:
+  handle: MyString
+  level: 1
+  school: MyString
+  student_id: 1
+  college: MyString
+  major: MyString
+  mobile: MyString
