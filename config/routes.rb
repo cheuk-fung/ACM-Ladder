@@ -1,7 +1,11 @@
 ACMLadder::Application.routes.draw do
   get "home/index"
 
-  resources :problems
+  resources :problems do
+    resources :submissions
+  end
+
+  resources :submissions
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
