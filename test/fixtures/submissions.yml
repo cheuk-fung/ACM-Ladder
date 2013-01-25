@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  problem: 
+  original_id: 1
+  code: MyText
+  language: MyString
+  time: 1
+  memory: 1
+  status: MyString
+
+two:
+  user: 
+  problem: 
+  original_id: 1
+  code: MyText
+  language: MyString
+  time: 1
+  memory: 1
+  status: MyString
