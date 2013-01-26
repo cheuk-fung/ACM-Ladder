@@ -3,6 +3,7 @@ ACMLadder::Application.routes.draw do
 
   resources :problems do
     resources :submissions
+    get :submit, :on => :member
   end
 
   resources :submissions
