@@ -1,0 +1,10 @@
+<h1>Submission List</h1>
+<ul>
+  <% @submissions.each do |submission| %>
+    <li>
+    <%= submission.id %>
+    <%= submission.problem_id %>
+    <%= submission.language %>
+    </li>
+  <% end %>
+</ul>

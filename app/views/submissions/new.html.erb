@@ -1,0 +1,11 @@
+<%= simple_form_for [@problem, @submission], :html => { :class => 'form-horizontal' } do |form| %>
+  <fieldset>
+    <legend>Submit Problem <%= @problem.id %></legend>
+    <%= form.input :language, :collection => language_list %>
+    <%= form.input :code %>
+
+    <%= form.submit %>
+    <%= submit_tag "Cancel", :type => :reset %>
+  </fieldset>
+<% end %>
+
