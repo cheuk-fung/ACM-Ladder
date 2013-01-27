@@ -4,7 +4,7 @@ class Submission < ActiveRecord::Base
   attr_accessible :code, :language
   validates_presence_of :problem_id, :code, :language # :user_id
 
-  def submit!
+  def submit
     case self.problem.source
     when "POJ"
       submit_poj
@@ -12,7 +12,7 @@ class Submission < ActiveRecord::Base
       submit_nkoj
     end
   end
-  handle_asynchronously :submit!, :queue => "submit"
+  handle_asynchronously :submit, :queue => "submit"
 
   private
 
