@@ -14,6 +14,7 @@ class SubmissionsController < ApplicationController
     @submission.problem = @problem
 
     if @submission.save
+      @submission.submit!	# delayed job
       redirect_to submissions_url, :notice => "Submit successfully."
     else
       render :action => "new"

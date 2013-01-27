@@ -5,6 +5,10 @@
     <%= submission.id %>
     <%= submission.problem_id %>
     <%= language_list.invert[submission.language] %>
+    <%= status_list[submission.status] %>
+    <%= submission.time %>
+    <%= submission.memory %>
+    <%= submission.created_at %>
     </li>
   <% end %>
 </ul>
