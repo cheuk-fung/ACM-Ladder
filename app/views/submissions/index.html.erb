@@ -4,7 +4,7 @@
     <li>
     <%= submission.id %>
     <%= submission.problem_id %>
-    <%= submission.language %>
+    <%= language_list.invert[submission.language] %>
     </li>
   <% end %>
 </ul>

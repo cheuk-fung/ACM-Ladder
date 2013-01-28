@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20130125094030) do
     t.integer  "problem_id"
     t.integer  "original_id"
     t.text     "code"
-    t.string   "language"
+    t.integer  "language"
     t.integer  "time"
     t.integer  "memory"
     t.string   "status"
