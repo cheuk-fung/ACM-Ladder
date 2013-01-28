@@ -39,3 +39,4 @@ gem 'jquery-rails'
 
 gem 'hpricot'
 gem 'simple_form'
+gem 'delayed_job_active_record'
