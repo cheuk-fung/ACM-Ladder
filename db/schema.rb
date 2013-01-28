@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130125094030) do
+ActiveRecord::Schema.define(:version => 20130128163859) do
 
   create_table "problems", :force => true do |t|
     t.string   "source"
@@ -35,12 +35,13 @@ ActiveRecord::Schema.define(:version => 20130125094030) do
     t.integer  "problem_id"
     t.integer  "original_id"
     t.text     "code"
-    t.integer  "language"
+    t.integer  "language",    :limit => 1
     t.integer  "time"
     t.integer  "memory"
-    t.integer  "status"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "status",      :limit => 1, :default => 0
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+    t.text     "error"
   end
 
   add_index "submissions", ["problem_id"], :name => "index_submissions_on_problem_id"
