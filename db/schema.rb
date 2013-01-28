@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(:version => 20130125094030) do
     t.integer  "language"
     t.integer  "time"
     t.integer  "memory"
-    t.string   "status"
+    t.integer  "status"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
