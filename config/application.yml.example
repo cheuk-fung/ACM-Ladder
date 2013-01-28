@@ -1,3 +1,5 @@
 # Add application configuration variables here.
 
 # Add OJ account credentials.
+POJ_HANDLE:	""
+POJ_PASSWORD:	""
