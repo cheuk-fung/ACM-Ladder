@@ -1,11 +1,7 @@
 module SubmissionsHelper
-  def language_list
-    { "C" => 0, "C++" => 1, "Java" => 2, "Pascal" => 3 }
-  end
-
   def status_list
-    [
-      "Waiting",
+    [ "Waiting",
+      "Running",
       "Accepted",
       "Presentation Error",
       "Time Limit Exceeded",
@@ -13,8 +9,8 @@ module SubmissionsHelper
       "Wrong Answer",
       "Runtime Error",
       "Output Limit Exceeded",
+      "Function Limit Exceeded",
       "Compile Error",
-      "System Error"
-    ]
+      "System Error" ]
   end
 end
