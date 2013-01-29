@@ -26,7 +26,7 @@ class Submission < ActiveRecord::Base
     base_url = "http://poj.org"
     login_url = "#{base_url}/login"
     submit_url = "#{base_url}/submit"
-    status_url = "#{base_url}/status?problem_id=#{self.problem_id}&user_id=#{ENV['POJ_HANDLE']}"
+    status_url = "#{base_url}/status?problem_id=#{self.problem.original_id}&user_id=#{ENV['POJ_HANDLE']}"
 
     languages = { "C++" => 0, "C" => 1, "Java" => 2, "Pascal" => 3 }
     language = languages[ApplicationController.helpers.language_list.invert[self.language]]
@@ -47,6 +47,24 @@ class Submission < ActiveRecord::Base
                               'language' => language,
                               'source' => self.code })
       response = http.request(request)
+    end
+
+    require "open-uri"
+
+    while self.status <= 2 # waiting, compiling or running
+      doc = Hpricot(open(status_url))
+      result = doc.search("table")[4].search("tr")[1].search("td")
+      self.original_id ||= result[0].inner_html
+      status = result[3].at("font").inner_html
+      self.status = ApplicationController.helpers.status_list[status =~ /Running/ ? "Running" : status]
+      if status == "Accepted"
+        self.memory = result[4].inner_html[/\d+/]
+        self.time = result[5].inner_html[/\d+/]
+      elsif status == "Compile Error"
+        doc = Hpricot(open("#{base_url}/showcompileinfo?solution_id=#{self.original_id}"))
+        self.error = doc.at("pre").inner_html
+      end
+      self.save
     end
   end
 end

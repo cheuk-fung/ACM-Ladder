@@ -1,11 +1,13 @@
 <h1>Submission List</h1>
 <ul>
+  <% languages = language_list.invert %>
+  <% statuses = status_list.invert %>
   <% @submissions.each do |submission| %>
     <li>
     <%= submission.id %>
     <%= submission.problem_id %>
-    <%= language_list.invert[submission.language] %>
-    <%= status_list[submission.status] %>
+    <%= languages[submission.language] %>
+    <%= statuses[submission.status] %>
     <%= submission.time %>
     <%= submission.memory %>
     <%= submission.created_at %>
