@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130129164007) do
+ActiveRecord::Schema.define(:version => 20130130161622) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -75,21 +75,21 @@ ActiveRecord::Schema.define(:version => 20130129164007) do
   add_index "submissions", ["user_id"], :name => "index_submissions_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "handle"
-    t.integer  "level"
+    t.string   "handle",                                              :null => false
+    t.integer  "level",                  :limit => 1, :default => 0
     t.string   "school"
     t.integer  "student_id"
     t.string   "college"
     t.string   "major"
     t.string   "mobile"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
+    t.string   "email",                               :default => "", :null => false
+    t.string   "encrypted_password",                  :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
+    t.integer  "sign_in_count",                       :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20130129164007) do
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["handle"], :name => "index_users_on_handle", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "users_roles", :id => false, :force => true do |t|

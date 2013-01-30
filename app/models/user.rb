@@ -9,7 +9,6 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :college, :handle, :level, :major, :mobile, :school, :student_id
-  validates_presence_of :handle
 
   # Virtual attribute for authenticating by either username or email
   # This is in addition to a real persisted field like 'username'
