@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
 
   has_many :submissions
 
+  after_create :assign_default_role
+
   # Overriding the following method for authenticating by either username of email
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
@@ -25,5 +27,11 @@ class User < ActiveRecord::Base
     else
       where(conditions).first
     end
+  end
+
+  private
+
+  def assign_default_role
+    add_role :user
   end
 end
