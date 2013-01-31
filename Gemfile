@@ -38,6 +38,7 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'hpricot'
+gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'delayed_job_active_record'
 gem 'figaro'
