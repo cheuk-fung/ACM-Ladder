@@ -1,7 +1,7 @@
 ACM Ladder
 ==========
 
-A level-based [ACM-ICPC][] training site based on the idea of [USACO
+A level-based [ACM-ICPC][] training site inspired by the idea of [USACO
 Training Program][usaco] and developed using [rails][] and
 [twitter bootstrap][bootstrap].
 [ACM-ICPC]: http://icpc.baylor.edu/
