@@ -1,5 +1,13 @@
 # Add application configuration variables here.
 
+# Add site admin account credentials.
+ADMIN_HANDLE:	""
+ADMIN_EMAIL:	""
+ADMIN_PASSWORD:	""
+
+# Roles configuration.
+ROLES:		[admin, user]
+
 # Add OJ account credentials.
 POJ_HANDLE:	""
 POJ_PASSWORD:	""
