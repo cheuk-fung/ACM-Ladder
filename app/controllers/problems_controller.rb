@@ -1,14 +1,13 @@
 class ProblemsController < ApplicationController
+  load_and_authorize_resource
+
   def index
-    @problems = Problem.all
   end
 
   def new
-    @problem = Problem.new
   end
 
   def create
-    @problem = Problem.new(params[:problem])
     @problem.fetch_remote
 
     if @problem.save
@@ -20,6 +19,5 @@ class ProblemsController < ApplicationController
   end
 
   def show
-    @problem = Problem.find(params[:id])
   end
 end

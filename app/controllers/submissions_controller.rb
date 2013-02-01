@@ -1,16 +1,15 @@
 class SubmissionsController < ApplicationController
+  load_and_authorize_resource
+
   def index
-    @submissions = Submission.all
   end
 
   def new
     @problem = Problem.find(params[:problem_id])
-    @submission = Submission.new
   end
 
   def create
     @problem = Problem.find(params[:problem_id])
-    @submission = Submission.new(params[:submission])
     @submission.problem = @problem
 
     if @submission.save

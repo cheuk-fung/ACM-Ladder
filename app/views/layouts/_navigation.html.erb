@@ -1,9 +1,9 @@
 <%= link_to 'ACM Ladder', root_path, :class => 'brand' %>
 <ul class="nav">
-  <li>
+  <li class="<%= 'active' if params[:controller] == 'problems' %>">
   <%= link_to 'Problem', problems_path %>
   </li>
-  <li>
+  <li class="<%= 'active' if params[:controller] == 'submissions' %>">
   <%= link_to 'Status', submissions_path %>
   </li>
 </ul>
@@ -16,14 +16,14 @@
   <ul class="dropdown-menu">
     <% if user_signed_in? %>
       <li>
-      <%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %>
+      <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
       </li>
       <li>
       <%= link_to 'Edit account', edit_user_registration_path %>
       </li>
     <% else %>
       <li>
-      <%= link_to 'Sign in', new_user_session_path %>
+      <%= link_to 'Login', new_user_session_path %>
       </li>
       <li>
       <%= link_to 'Sign up', new_user_registration_path %>
