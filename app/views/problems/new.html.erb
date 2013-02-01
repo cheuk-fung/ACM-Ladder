@@ -3,7 +3,7 @@
   <fieldset>
     <%= form.input :source, :collection => source_list %>
     <%= form.input :original_id, :label => "ID" %>
-    <%= form.input :level, :collection => 0..10 %>
+    <%= form.input :level, :collection => 0..Integer(ENV['MAX_LEVEL']) %>
 
     <%= form.submit %>
     <%= submit_tag "Cancel", :type => :reset %>

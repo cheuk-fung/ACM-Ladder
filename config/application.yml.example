@@ -1,15 +1,18 @@
-# Add application configuration variables here.
+# Set application configuration variables here.
 
-# Add site admin account credentials.
+# Set site admin account credentials.
 ADMIN_HANDLE:	""
 ADMIN_EMAIL:	""
 ADMIN_PASSWORD:	""
 
-# Add OJ account credentials.
+# Set OJ account credentials.
 POJ_HANDLE:	""
 POJ_PASSWORD:	""
-#
-# Footer information.
+
+# Set max problem level.
+MAX_LEVEL:	10
+
+# Set footer information.
 # Modifiy the footer seciton in app/views/layouts/application.html.erb
 # if you need advanced customization.
 FOOTER:		'Powered by <a href=""></a>'

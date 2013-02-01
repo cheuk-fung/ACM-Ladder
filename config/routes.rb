@@ -1,11 +1,11 @@
 ACMLadder::Application.routes.draw do
   devise_for :users
 
-  get "home/index"
+  get 'home/index'
 
   resources :problems do
     resources :submissions
-    get "submit" => "submissions#new"
+    get 'submit' => 'submissions#new'
   end
 
   resources :submissions
