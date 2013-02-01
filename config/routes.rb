@@ -3,6 +3,10 @@ ACMLadder::Application.routes.draw do
 
   get 'home/index'
 
+  resources :users do
+    resources :submissions
+  end
+
   resources :problems do
     resources :submissions
     get 'submit' => 'submissions#new'

@@ -1,11 +1,54 @@
-<h1>Problem List</h1>
-<ul>
-  <% @problems.each do |problem| %>
-    <li>
-    <%= problem.id %>
-    <%= problem.source %>
-    <%= problem.original_id %>
-    <%= link_to problem.title, problem %>
-    </li>
-  <% end %>
-</ul>
+<h2>Level <%= @current_level %></h2>
+<table class='table table-striped'>
+  <thead>
+    <tr>
+      <th class='span1'>ID</th>
+      <th class='span2'>Source</th>
+      <th>Title</th>
+      <th class='span2'>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @problems.each do |problem| %>
+      <tr>
+        <td><%= problem.id %></td>
+        <td>
+          <%= link_to problem.source, "#", :class => 'label label-info' %>
+          <%= link_to problem.original_id.to_s, "#", :class => 'badge badge-success' %>
+        </td>
+        <td><%= link_to problem.title, problem %></td>
+        <td><%= show_user_status(problem) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="pagination pagination-centered">
+  <ul>
+    <% if @current_level == 0 %>
+      <li class="disabled"><span>«</span></li>
+    <% else %>
+      <li>
+      <a href="<%= "#{problems_path}?level=#{@current_level - 1}" %>">«</a>
+      </li>
+    <% end %>
+    <li class="disabled"><span>Level</span></li>
+    <% (0..Integer(ENV['MAX_LEVEL'])).each do |l| %>
+      <% if @user_level < l %>
+        <li class="disabled"><span><%= l %></span></li>
+      <% elsif @current_level == l %>
+        <li class="active"><span><%= "#{l}" %></span></li>
+      <% else %>
+        <li>
+        <a href="<%= "#{problems_path}?level=#{l}" %>"><%= l %></a>
+        </li>
+      <% end %>
+    <% end %>
+    <% if @current_level == @user_level || @current_level == Integer(ENV['MAX_LEVEL']) %>
+      <li class="disabled"><span>»</span></li>
+    <% else %>
+      <li>
+      <a href="<%= "#{problems_path}?level=#{@current_level + 1}" %>">»</a>
+      </li>
+    <% end %>
+  </ul>
+</div>
