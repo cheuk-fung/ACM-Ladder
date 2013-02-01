@@ -2,7 +2,7 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
 puts "Creating roles..."
-YAML.load(ENV['ROLES']).each do |role|
+["admin", "user"].each do |role|
   Role.find_or_create_by_name({ :name => role }, :without_protection => true)
   puts "\tCreated role: " << role
 end

@@ -5,9 +5,11 @@ ADMIN_HANDLE:	""
 ADMIN_EMAIL:	""
 ADMIN_PASSWORD:	""
 
-# Roles configuration.
-ROLES:		[admin, user]
-
 # Add OJ account credentials.
 POJ_HANDLE:	""
 POJ_PASSWORD:	""
+#
+# Footer information.
+# Modifiy the footer seciton in app/views/layouts/application.html.erb
+# if you need advanced customization.
+FOOTER:		'Powered by <a href=""></a>'
