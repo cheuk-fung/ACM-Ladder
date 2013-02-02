@@ -27,10 +27,35 @@ class ProblemsController < ApplicationController
     @problem.fetch_remote
 
     if @problem.save
-      redirect_to problems_url, :notice => "Problem was successfully created."
+      redirect_to problem_path(@problem), :notice => "Problem was successfully created."
     else
       flash[:alert] = "Failed to create problem."
       render :action => "new"
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    @problem.update_attributes(params[:problem])
+    @problem.title = nil
+    @problem.time_limit = nil
+    @problem.memory_limit = nil
+    @problem.description = nil
+    @problem.input = nil
+    @problem.output = nil
+    @problem.sample_input = nil
+    @problem.sample_output = nil
+    @problem.hint = nil
+
+    @problem.fetch_remote
+
+    if @problem.save
+      redirect_to problem_path(@problem), :notice => "Problem was successfully updated."
+    else
+      flash[:alert] = "Failed to edit problem."
+      render :action => "edit"
     end
   end
 
