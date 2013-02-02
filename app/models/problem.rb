@@ -15,9 +15,11 @@ class Problem < ActiveRecord::Base
   private
 
   def fetch_poj
+    return if self.original_id.nil?
+
     require "open-uri"
 
-    url = "http://poj.org/problem?id=#{original_id}"
+    url = "http://poj.org/problem?id=#{self.original_id}"
     doc = Hpricot(open(url))
 
     result = doc.at("div.ptt")
