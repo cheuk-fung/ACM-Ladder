@@ -1,11 +1,11 @@
 <h2>Level <%= @current_level %></h2>
-<table class='table table-striped'>
+<table class="table table-striped table-hover">
   <thead>
     <tr>
-      <th class='span1'>ID</th>
-      <th class='span2'>Source</th>
+      <th class="span1">ID</th>
+      <th class="span2">Source</th>
       <th>Title</th>
-      <th class='span2'>Status</th>
+      <th class="span1">Status</th>
     </tr>
   </thead>
   <tbody>
@@ -13,11 +13,11 @@
       <tr>
         <td><%= problem.id %></td>
         <td>
-          <%= link_to problem.source, "#", :class => 'label label-info' %>
-          <%= link_to problem.original_id.to_s, "#", :class => 'badge badge-success' %>
+          <span class="label label-info"><%= problem.source %></span>
+          <span class="badge badge-success"><%= problem.original_id %></span>
         </td>
         <td><%= link_to problem.title, problem %></td>
-        <td><%= show_user_status(problem) %></td>
+        <td style="text-align:center"><%= show_user_status(problem) %></td>
       </tr>
     <% end %>
   </tbody>
