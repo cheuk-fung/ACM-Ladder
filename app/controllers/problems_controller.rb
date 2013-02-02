@@ -60,5 +60,9 @@ class ProblemsController < ApplicationController
   end
 
   def show
+    user_level = user_signed_in? ? current_user.level : 0
+    if user_level < @problem.level
+      redirect_to problems_path, :alert => "Oops, you are not powerful enough to view this problem...."
+    end
   end
 end
