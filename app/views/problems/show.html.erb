@@ -1,22 +1,45 @@
-<h1><%= @problem.title %></h1>
-<p>Source: <%= "#{@problem.source} #{@problem.original_id}" %></p>
-<p>Time: <%= @problem.time_limit %>MS</p>
-<p>Memory: <%= @problem.memory_limit %>K</p>
-<h2>Description</h2>
+<center><h2><%= @problem.title %></h2></center>
+<table class="table table-hover">
+  <tbody>
+    <tr>
+      <td>
+        <strong>Source</strong>
+      </td>
+      <td class="text-info">
+        <%= "#{@problem.source} #{@problem.original_id}" %>
+      </td>
+      <td>
+        <strong>Time Limit</strong>
+      </td>
+      <td class="text-warning">
+        <%= @problem.time_limit %>MS
+      </td>
+      <td>
+        <strong>Memory Limit</strong>
+      </td>
+      <td class="text-warning">
+        <%= @problem.memory_limit %>K
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 class="segtitle">Description</h3>
 <%= @problem.description.html_safe %>
-<h3>Input</h3>
+<h3 class="segtitle">Input</h3>
 <%= @problem.input.html_safe %>
-<h3>Output</h3>
+<h3 class="segtitle">Output</h3>
 <%= @problem.output.html_safe %>
-<h3>Sample Input</h3>
+<h3 class="segtitle">Sample Input</h3>
 <pre><%= @problem.sample_input %></pre>
-<h3>Sample Output</h3>
+<h3 class="segtitle">Sample Output</h3>
 <pre><%= @problem.sample_output %></pre>
 <% if @problem.hint %>
-  <h3>Hint</h3>
+  <h3 class="segtitle">Hint</h3>
   <%= @problem.hint.html_safe %>
 <% end %>
 
-<div>
-  <%= link_to "Submit", problem_submit_path(@problem) %>
+<div class="form-actions">
+  <center>
+    <%= link_to "Submit", problem_submit_path(@problem), :class => "btn btn-primary" %>
+  </center>
 </div>
