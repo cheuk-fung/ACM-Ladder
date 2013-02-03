@@ -38,18 +38,7 @@ class ProblemsController < ApplicationController
   end
 
   def update
-    @problem.update_attributes(params[:problem])
-    @problem.title = nil
-    @problem.time_limit = nil
-    @problem.memory_limit = nil
-    @problem.description = nil
-    @problem.input = nil
-    @problem.output = nil
-    @problem.sample_input = nil
-    @problem.sample_output = nil
-    @problem.hint = nil
-
-    @problem.fetch_remote
+    @problem.level = params[:problem][:level]
 
     if @problem.save
       redirect_to problem_path(@problem), :notice => "Problem was successfully updated."
