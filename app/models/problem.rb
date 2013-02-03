@@ -31,10 +31,10 @@ class Problem < ActiveRecord::Base
     self.memory_limit = result[2].inner_html[/\d+/]
 
     result = doc/"div.ptx"
-    self.description = result[0].inner_html
-    self.input = result[1].inner_html
-    self.output = result[2].inner_html
-    self.hint = result[3].inner_html if doc.search("p.pst").inner_html.include?("Hint")
+    self.description = result[0].inner_html.sub('<img src="', '<img src="http://poj.org/')
+    self.input = result[1].inner_html.sub('<img src="', '<img src="http://poj.org/')
+    self.output = result[2].inner_html.sub('<img src="', '<img src="http://poj.org/')
+    self.hint = result[3].inner_html.sub('<img src="', '<img src="http://poj.org/') if doc.search("p.pst").inner_html.include?("Hint")
 
     result = doc/"pre.sio"
     self.sample_input = result[0].inner_html
