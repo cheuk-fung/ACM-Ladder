@@ -8,6 +8,7 @@ class Ability
     elsif user.has_role? :user
       can :read, :all
       can :create, Submission
+      can :level_up, User
     else
       can :read, :all
     end
