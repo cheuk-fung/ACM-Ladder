@@ -17,7 +17,17 @@ class ProblemsController < ApplicationController
       flash[:alert] = "Kidding? The level you tell me is not a number!"
       @current_level = @user_level
     end
-    @problems = Problem.where(:level => @current_level)
+    @problems = Problem.where(:level => @current_level).all
+
+    @status = []
+    if user_signed_in?
+      accepted = ApplicationController.helpers.status_list["Accepted"]
+      accepted_status = current_user.submissions.select(:problem_id).uniq.where(:problem_id => @problems, :status => accepted);
+      accepted_status.each { |submission| @status[submission.problem_id] = :accepted }
+      failed_status = current_user.submissions.select(:problem_id).uniq.where(:problem_id => @problems);
+      failed_status.each { |submission|  @status[submission.problem_id] ||= :failed }
+      @problems.each { |problem| @status[problem.id] ||= :unopened }
+    end
   end
 
   def new

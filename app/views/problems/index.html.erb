@@ -17,7 +17,7 @@
           <span class="badge badge-success"><%= problem.original_id %></span>
         </td>
         <td><%= link_to problem.title, problem %></td>
-        <td><center><%= show_user_status(problem) %></center></td>
+        <td><center><%= show_status(@status[problem.id]) %></center></td>
       </tr>
     <% end %>
   </tbody>
