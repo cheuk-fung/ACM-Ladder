@@ -1,8 +1,4 @@
 module ProblemsHelper
-  def source_list
-    ["POJ", "NKOJ"]
-  end
-
   def show_user_status(problem)
     if user_signed_in?
       submissions = current_user.submissions.where(:problem_id => problem.id)
