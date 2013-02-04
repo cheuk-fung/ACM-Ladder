@@ -30,7 +30,7 @@ class ProblemsController < ApplicationController
       redirect_to problem_path(@problem), :notice => "Problem was successfully created."
     else
       flash[:alert] = "Failed to create problem."
-      render :action => "new"
+      render :action => :new
     end
   end
 
@@ -44,7 +44,7 @@ class ProblemsController < ApplicationController
       redirect_to problem_path(@problem), :notice => "Problem was successfully updated."
     else
       flash[:alert] = "Failed to edit problem."
-      render :action => "edit"
+      render :action => :edit
     end
   end
 

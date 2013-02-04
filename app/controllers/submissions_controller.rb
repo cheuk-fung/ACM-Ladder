@@ -9,15 +9,16 @@ class SubmissionsController < ApplicationController
   end
 
   def create
+    @problem = Problem.find(params[:problem_id])
+    @submission.problem = @problem
     @submission.user = current_user
-    @submission.problem = Problem.find(params[:problem_id])
 
     if @submission.save
       @submission.submit	# delayed job
       redirect_to submissions_url, :notice => "Submit successfully."
     else
       flash[:alert] = "Failed to submit."
-      render :action => "new"
+      render :action => :new
     end
   end
 end
