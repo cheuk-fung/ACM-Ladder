@@ -1,5 +1,5 @@
 module ProblemsHelper
-  def show_status(status)
+  def show_problem_status(status)
     case status
     when :accepted then '<i class="icon-ok"></i>'.html_safe
     when :failed then '<i class="icon-remove"></i>'.html_safe

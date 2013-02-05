@@ -1,16 +1,51 @@
-<h1>Submission List</h1>
-<ul>
-  <% languages = language_list.invert %>
-  <% statuses = status_list.invert %>
-  <% @submissions.each do |submission| %>
-    <li>
-    <%= submission.id %>
-    <%= submission.problem_id %>
-    <%= languages[submission.language] %>
-    <%= statuses[submission.status] %>
-    <%= submission.time %>
-    <%= submission.memory %>
-    <%= submission.created_at %>
+<h2>Submissions</h2>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Problem</th>
+      <th>Status</th>
+      <th>Time</th>
+      <th>Memory</th>
+      <th>Language</th>
+      <th>Submit Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% languages = language_list.invert %>
+    <% statuses = status_list.invert %>
+    <% @submissions.each do |submission| %>
+      <tr>
+        <td><%= submission.id %></td>
+        <td><%= submission.user.handle %></td>
+        <td><center><%= link_to submission.problem_id, problem_path(submission.problem_id) %></center></td>
+        <td>
+          <% if user_signed_in? && (current_user.has_role?(:admin) || submission.user_id == current_user.id) && statuses[submission.status] == "Compile Error" %>
+            <%= link_to "Compile Error", submission_compile_error_path(submission), :class => "btn btn-warning btn-mini" %>
+          <% else %>
+            <span class="label label-<%= show_submission_status(statuses[submission.status]) %>">
+              <%= statuses[submission.status] %>
+            </span>
+          <% end %>
+        </td>
+        <td><%= "#{submission.time}ms" if submission.time %></td>
+        <td><%= "#{submission.memory}KB" if submission.memory %></td>
+        <td><%= languages[submission.language] %></td>
+        <td><%= submission.created_at.localtime.to_s(:db) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<ul class="pager">
+  <% if @current_page > 1 %>
+    <li class="previous">
+    <a href="<%= "#{submissions_path}?page=#{@current_page - 1}" %>">&larr; Previous</a>
+    </li>
+  <% end %>
+  <% unless @submissions.empty? %>
+    <li class="next">
+    <a href="<%= "#{submissions_path}?page=#{@current_page + 1}" %>">Next &rarr;</a>
     </li>
   <% end %>
 </ul>

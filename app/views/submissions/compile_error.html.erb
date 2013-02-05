@@ -1,0 +1,28 @@
+<h2>Compile Error</h2>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Problem</th>
+      <th>Status</th>
+      <th>Time</th>
+      <th>Memory</th>
+      <th>Language</th>
+      <th>Submit Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @submission.id %></td>
+      <td><%= @submission.user.handle %></td>
+      <td><center><%= link_to @submission.problem_id, problem_path(@submission.problem_id) %></center></td>
+      <td><span class="label label-warning">Compile Error</span></td>
+      <td></td>
+      <td></td>
+      <td><%= language_list.invert[@submission.language] %></td>
+      <td><%= @submission.created_at.localtime.to_s(:db) %></td>
+    </tr>
+  </tbody>
+</table>
+<div class="well"><%= @error.html_safe %></div>
