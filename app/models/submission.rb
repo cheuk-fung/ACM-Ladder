@@ -10,7 +10,7 @@ class Submission < ActiveRecord::Base
     # Submit to remote OJ and keep checking status until judgement finishes.
     # Current local submission is bound to the last remote submission,
     # so this method can't run in parallel.
-    #
+
     case self.problem.source
     when "POJ"
       submit_poj

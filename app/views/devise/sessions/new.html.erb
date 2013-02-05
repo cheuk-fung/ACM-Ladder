@@ -1,14 +1,12 @@
-<h2>Sign in</h2>
-
-<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
+<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form-horizontal" }) do |f| %>
+  <fieldset>
+    <legend>Sign in</legend>
     <%= f.input :login, :required => false, :autofocus => true, :hint => "Login with handle or email" %>
     <%= f.input :password, :required => false %>
     <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
-  </div>
-
+  </fieldset>
   <div class="form-actions">
-    <%= f.button :submit, "Sign in" %>
+    <%= f.button :submit, "Sign in", :class => "btn btn-primary" %>
   </div>
 <% end %>
 
