@@ -1,14 +1,14 @@
 ACMLadder::Application.routes.draw do
-  devise_for :users, :skip => :registrations do
+  get 'home/index'
+
+  devise_for :users, :path => 'u', :skip => :registrations do
     resource :registration,
              :only => [:new, :create, :edit, :update],
-             :path => 'users',
-             :path_names => { new: 'sign_up' },
+             :path => 'u',
+             :path_names => { :new => 'sign_up' },
              :controller => 'devise/registrations',
              :as => :user_registration
   end
-
-  get 'home/index'
 
   resources :users do
     resources :submissions
