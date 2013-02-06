@@ -12,14 +12,19 @@ class User < ActiveRecord::Base
   validates_presence_of :handle
   validates_uniqueness_of :handle
 
+  has_many :submissions
+
+  after_create :assign_default_role
+
+  # Change route from id to handle
+  def to_param
+    handle
+  end
+
   # Virtual attribute for authenticating by either username or email
   # This is in addition to a real persisted field like 'username'
   attr_accessor :login
   attr_accessible :login
-
-  has_many :submissions
-
-  after_create :assign_default_role
 
   # Overriding the following method for authenticating by either username of email
   def self.find_first_by_auth_conditions(warden_conditions)

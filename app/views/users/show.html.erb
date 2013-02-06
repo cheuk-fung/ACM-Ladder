@@ -1,0 +1,62 @@
+<h3>User Profile</h3>
+<dl class="dl-horizontal">
+  <dt>Handle</dt>
+  <dd><%= @user.handle %></dd>
+  <dt>Level</dt>
+  <dd><%= @user.level %></dd>
+  <% unless @user.school.blank? %>
+    <dt>School</dt>
+    <dd><%= @user.school %></dd>
+  <% end %>
+  <dt>Solved</dt>
+  <dd>
+  <% if @solved.count == 0 %>
+    <span class="label label-success">
+      <%= @solved.count %>
+    </span>
+  <% else %>
+    <a href="#solved" class="label label-success" data-toggle="collapse">
+      <%= @solved.count %>
+    </a>
+    <div id="solved" class="collapse">
+      <ul class="inline well well-small">
+        <% @solved.each do |id| %>
+          <li>
+          <%= link_to id, problem_path(id) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  </dd>
+  <dt>Failed</dt>
+  <dd>
+  <% if @failed.count == 0 %>
+    <span class="label label-warning">
+      <%= @failed.count %>
+    </span>
+  <% else %>
+    <a href="#failed" class="label label-warning" data-toggle="collapse">
+      <%= @failed.count %>
+    </a>
+    <div id="failed" class="collapse">
+      <ul class="inline well well-small">
+        <% @failed.each do |id| %>
+          <li>
+          <%= link_to id, problem_path(id) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <dt>Submitted</dt>
+  <dd>
+  <span class="label label-info">
+    <%= @submitted.count %>
+  </span>
+  </dd>
+  <dt>Member Since</dt>
+  <dd><%= @user.created_at.localtime.to_s(:rfc822) %></dd>
+  <dt>Last Login</dt>
+  <dd><%= @user.last_sign_in_at.localtime.to_s(:rfc822) %></dd>
+</dl>

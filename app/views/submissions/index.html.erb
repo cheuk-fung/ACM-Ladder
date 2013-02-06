@@ -18,7 +18,7 @@
     <% @submissions.each do |submission| %>
       <tr>
         <td><%= submission.id %></td>
-        <td><%= submission.user.handle %></td>
+        <td><%= link_to submission.user.handle, user_path(submission.user) %></td>
         <td><center><%= link_to submission.problem_id, problem_path(submission.problem_id) %></center></td>
         <td>
           <% if user_signed_in? && (current_user.has_role?(:admin) || submission.user_id == current_user.id) && statuses[submission.status] == "Compile Error" %>

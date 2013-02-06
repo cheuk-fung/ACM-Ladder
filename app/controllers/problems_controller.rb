@@ -22,12 +22,12 @@ class ProblemsController < ApplicationController
     @status = []
     if user_signed_in?
       accepted = ApplicationController.helpers.status_list["Accepted"]
-      accepted_status = current_user.submissions.select(:problem_id).uniq.where(:problem_id => @problems, :status => accepted);
+      accepted_status = current_user.submissions.select(:problem_id).uniq.where(:problem_id => @problems, :status => accepted)
       accepted_status.each { |submission| @status[submission.problem_id] = :accepted }
       if @current_level == current_user.level && accepted_status.length == @problems.length
         @level_up = true
       else
-        failed_status = current_user.submissions.select(:problem_id).uniq.where(:problem_id => @problems);
+        failed_status = current_user.submissions.select(:problem_id).uniq.where(:problem_id => @problems)
         failed_status.each { |submission|  @status[submission.problem_id] ||= :failed }
         @problems.each { |problem| @status[problem.id] ||= :unopened }
       end
