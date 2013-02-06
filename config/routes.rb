@@ -1,7 +1,8 @@
 ACMLadder::Application.routes.draw do
   get 'home/index'
 
-  devise_for :users, :path => 'u', :skip => :registrations do
+  devise_for :users, :path => 'u', :skip => :registrations
+  devise_scope :user do
     resource :registration,
              :only => [:new, :create, :edit, :update],
              :path => 'u',
