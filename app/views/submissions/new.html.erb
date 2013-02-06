@@ -2,11 +2,11 @@
   <fieldset>
     <legend>Submit Problem <%= @problem.id %></legend>
     <%= form.input :language, :collection => language_list %>
-    <%= form.input :code, :input_html => { :class => "span6" } %>
+    <%= form.input :code, :input_html => { :class => "span8" } %>
   </fieldset>
   <div class="form-actions">
     <%= form.submit "Submit", :class => "btn btn-primary" %>
-    <%= submit_tag "Cancel", :type => :reset, :class => "btn btn-danger pull-right" %>
+    <%= link_to "Back", :back, :class => "btn btn-danger pull-right" %>
   </div>
 <% end %>
 

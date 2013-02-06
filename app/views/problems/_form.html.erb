@@ -7,6 +7,6 @@
   </fieldset>
   <div class="form-actions">
       <%= form.submit @problem.id ? "Update" : "Create", :class => "btn btn-primary" %>
-      <%= submit_tag "Cancel", :type => :reset, :class => "btn btn-danger pull-right" %>
+      <%= link_to "Back", :back, :class => "btn btn-danger pull-right" %>
   </div>
 <% end %>

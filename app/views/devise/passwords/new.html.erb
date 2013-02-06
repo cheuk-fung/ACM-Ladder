@@ -1,7 +1,7 @@
 <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => "form-horizontal" }) do |f| %>
   <fieldset>
     <legend>Forgot your password?</legend>
-    <%= f.input :login, :required => true, :autofocus => true, :hint => "Reset with handle or email" %>
+    <%= f.input :login, :required => true, :autofocus => true, :hint => "reset with handle or email" %>
   </fieldset>
 
   <div class="form-actions">
