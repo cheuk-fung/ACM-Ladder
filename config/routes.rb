@@ -12,7 +12,7 @@ ACMLadder::Application.routes.draw do
 
   resources :users do
     resources :submissions
-    get 'level_up' => 'users#level_up'
+    post '/' => 'users#level_up'
   end
 
   resources :problems do

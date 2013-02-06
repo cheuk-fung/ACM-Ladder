@@ -1,5 +1,5 @@
 <% if @level_up && current_user.level < Integer(ENV['MAX_LEVEL'])%>
-  <%= link_to 'LEVEL UP!', user_level_up_path(current_user), :class => 'btn btn-success pull-right' %>
+  <%= button_to 'LEVEL UP!', user_path(current_user), :class => 'btn btn-success pull-right' %>
 <% end %>
 <h2>Level <%= @current_level %></h2>
 <table class="table table-striped table-hover">
