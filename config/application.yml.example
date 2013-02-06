@@ -1,9 +1,15 @@
 # Set application configuration variables here.
 
+HOST:		""
+
 # Set site admin account credentials.
 ADMIN_HANDLE:	""
 ADMIN_EMAIL:	""
 ADMIN_PASSWORD:	""
+
+# Set gmail account credentials for action mailer.
+GMAIL_USERNAME:	""
+GMAIL_PASSWORD:	""
 
 # Set OJ account credentials.
 POJ_HANDLE:	""
