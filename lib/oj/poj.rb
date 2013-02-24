@@ -4,8 +4,6 @@ require 'open-uri'
 # TODO: handles errors
 class POJ
   BaseURL = "http://poj.org"
-  LoginURL = "#{BaseURL}/login"
-  SubmitURL = "#{BaseURL}/submit"
   Handle = ENV['POJ_HANDLE']
   Password = ENV['POJ_PASSWORD']
   Languages = { "C++" => 0, "C" => 1, "Java" => 2, "Pascal" => 3 }
@@ -19,13 +17,13 @@ class POJ
   def submit
     uri = URI(BaseURL)
     Net::HTTP.start(uri.host, uri.port) do |http|
-      uri = URI(LoginURL)
+      uri = URI("#{BaseURL}/login")
       request = Net::HTTP::Post.new(uri.request_uri)
       request.set_form_data({ 'user_id1' => Handle, 'password1' => Password })
       response = http.request(request)
       cookies = response.response['set-cookie']
 
-      uri = URI(SubmitURL)
+      uri = URI("#{BaseURL}/submit")
       request = Net::HTTP::Post.new(uri.request_uri)
       request['Cookie'] = cookies
       request.set_form_data({ 'problem_id' => @submission.problem.original_id,
