@@ -34,6 +34,7 @@ GEM
       sass (~> 3.2)
     builder (3.0.4)
     cancan (1.6.9)
+    coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -72,11 +73,18 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    method_source (0.8.1)
     mime-types (1.20.1)
     multi_json (1.5.0)
     mysql2 (0.3.11)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
+    pry (0.9.12)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.4)
+    pry-rails (0.2.2)
+      pry (>= 0.9.10)
     rack (1.4.4)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -112,6 +120,7 @@ GEM
     simple_form (2.0.4)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
+    slop (3.4.3)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -147,6 +156,7 @@ DEPENDENCIES
   hpricot
   jquery-rails
   mysql2
+  pry-rails
   rails (= 3.2.11)
   rolify
   sass-rails (~> 3.2.3)
