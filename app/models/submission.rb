@@ -1,4 +1,5 @@
 require 'oj/poj'
+require 'oj/nkoj'
 
 class Submission < ActiveRecord::Base
   belongs_to :user
@@ -27,5 +28,9 @@ class Submission < ActiveRecord::Base
     oj.submit(self)
     sleep 1
     oj.fetch_status(self)
+  end
+
+  def submit_nkoj
+    NKOJ.new.submit(self)
   end
 end

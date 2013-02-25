@@ -29,23 +29,25 @@ class POJ
   end
 
   def fetch_problem(problem)
-    return if problem.original_id.nil?
-
     doc = Hpricot(open(url = "#{BaseURL}/problem?id=#{problem.original_id}"))
 
     result = doc.at("div.ptt")
     return if result.nil?
     problem.title = result.inner_html
 
+    for item in doc/"img"
+      item['src'] = "#{BaseURL}/" + item['src']
+    end
+
     result = doc/"div.plm td"
     problem.time_limit = result[0].inner_html[/\d+/]
     problem.memory_limit = result[2].inner_html[/\d+/]
 
     result = doc/"div.ptx"
-    problem.description = result[0].inner_html.sub('<img src="', '<img src="http://poj.org/')
-    problem.input = result[1].inner_html.sub('<img src="', '<img src="http://poj.org/')
-    problem.output = result[2].inner_html.sub('<img src="', '<img src="http://poj.org/')
-    problem.hint = result[3].inner_html.sub('<img src="', '<img src="http://poj.org/') if doc.search("p.pst").inner_html.include?("Hint")
+    problem.description = result[0].inner_html
+    problem.input = result[1].inner_html
+    problem.output = result[2].inner_html
+    problem.hint = result[3].inner_html if doc.search("p.pst").inner_html.include?("Hint")
 
     result = doc/"pre.sio"
     problem.sample_input = result[0].inner_html
