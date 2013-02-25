@@ -23,9 +23,9 @@ class Submission < ActiveRecord::Base
   private
 
   def submit_poj
-    oj = POJ.new(self)
-    oj.submit
+    oj = POJ.new
+    oj.submit(self)
     sleep 1
-    oj.fetch_status
+    oj.fetch_status(self)
   end
 end
