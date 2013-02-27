@@ -9,6 +9,47 @@ Training Program][usaco] and developed using [rails][] and
 [rails]: http://rubyonrails.org/
 [bootstrap]: http://twitter.github.com/bootstrap/
 
+Getting Started[Rough Version]
+---------------
+
+### Clone the Project
+
+    git clone git://github.com/leewings/ACM-Ladder.git
+
+### Install Required Gems
+
+    bundle install
+
+### Change Secret Token
+
+1. Get an unique secret token.
+
+        rake secret
+
+2. Modify `config/initializers/secret_token.rb` to replace the old token to the new one.
+
+### Configure
+
+- `config/database.yml.example`
+
+  Modify this example file according to your database configuration and save
+  it to `config/database.yml`.
+
+- `config/application.yml.example`
+
+  Customize this example file according to your need and save it to
+  `config/application.yml`.
+
+### Setup Database
+
+    rake db:setup
+
+### Start `delayed_job` Daemon
+
+    script/delayed_job start
+
+### Enjoy!
+
 License
 -------
 ACM Ladder is released under the [MIT License][].
