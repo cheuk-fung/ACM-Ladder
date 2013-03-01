@@ -9,6 +9,10 @@ Training Program][usaco] and developed using [rails][] and
 [rails]: http://rubyonrails.org/
 [bootstrap]: http://twitter.github.com/bootstrap/
 
+Demo
+----
+[Nankai ACM Training Program](http://acm.nankai.edu.cn/ladder)
+
 Getting Started[Rough Version]
 ---------------
 
