@@ -66,7 +66,7 @@ class NKOJ
   end
 
   def fetch_problem(problem)
-    doc = Hpricot(open(url = "#{BaseURL}/p#{problem.original_id}.html"))
+    doc = Hpricot(open(url = "#{BaseURL}/p#{problem.original_id}.html").read.encode('UTF-8', 'GBK'))
 
     result = doc.at("#p_title_c")
     return if result.nil?
