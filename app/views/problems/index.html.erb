@@ -1,42 +1,47 @@
-<% if @level_up && current_user.level <= Integer(ENV['MAX_LEVEL'])%>
-  <%= button_to 'LEVEL UP!', user_path(current_user), :class => 'btn btn-success pull-right' %>
-<% end %>
-<h2>Level <%= @current_level %></h2>
-<table class="table table-striped table-hover">
-  <thead>
-    <tr>
-      <th class="span1">ID</th>
-      <th class="span2">Source</th>
-      <th>Title</th>
-      <th class="span1">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @problems.each do |problem| %>
+<% if @congratulations %>
+  <h2>Congratulations!</h2>
+  <p>You have finished all available levels.</p>
+<% else %>
+  <% if @level_up && current_user.level <= Integer(ENV['MAX_LEVEL'])%>
+    <%= button_to 'LEVEL UP!', user_path(current_user), :class => 'btn btn-success pull-right' %>
+  <% end %>
+  <h2>Level <%= @current_level %></h2>
+  <table class="table table-striped table-hover">
+    <thead>
       <tr>
-        <td><%= problem.id %></td>
-        <td>
-          <span class="label label-info"><%= problem.source %></span>
-          <span class="badge badge-success"><%= problem.original_id %></span>
-        </td>
-        <td><%= link_to problem.title, problem %></td>
-        <td><center><%= show_problem_status(@status[problem.id]) %></center></td>
+        <th class="span1">ID</th>
+        <th class="span2">Source</th>
+        <th>Title</th>
+        <th class="span1">Status</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<div class="pagination pagination-centered">
-  <ul>
-    <li class="disabled"><span>Level</span></li>
-    <% (0..@user_level).each do |l| %>
-      <% if l == @current_level %>
-        <li class="active"><span><%= l %></span></li>
-      <% else %>
-        <li>
-        <a href="<%= "#{problems_path}?level=#{l}" %>"><%= l %></a>
-        </li>
+    </thead>
+    <tbody>
+      <% @problems.each do |problem| %>
+        <tr>
+          <td><%= problem.id %></td>
+          <td>
+            <span class="label label-info"><%= problem.source %></span>
+            <span class="badge badge-success"><%= problem.original_id %></span>
+          </td>
+          <td><%= link_to problem.title, problem %></td>
+          <td><center><%= show_problem_status(@status[problem.id]) %></center></td>
+        </tr>
       <% end %>
-    <% end %>
-    <li class="disabled"><span><i class="icon-lock"></i></span></li>
-  </ul>
-</div>
+    </tbody>
+  </table>
+  <div class="pagination pagination-centered">
+    <ul>
+      <li class="disabled"><span>Level</span></li>
+      <% (0..[@user_level, Integer(ENV['MAX_LEVEL'])].min).each do |l| %>
+        <% if l == @current_level %>
+          <li class="active"><span><%= l %></span></li>
+        <% else %>
+          <li>
+          <a href="<%= "#{problems_path}?level=#{l}" %>"><%= l %></a>
+          </li>
+        <% end %>
+      <% end %>
+      <li class="disabled"><span><i class="icon-lock"></i></span></li>
+    </ul>
+  </div>
+<% end %>

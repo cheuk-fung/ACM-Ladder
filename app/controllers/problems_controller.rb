@@ -9,6 +9,8 @@ class ProblemsController < ApplicationController
       if @current_level < 0
         flash[:alert] = "Kidding? The level you tell me is negative!"
         @current_level = @user_level
+      elsif @current_level > Integer(ENV['MAX_LEVEL']) && @user_level > Integer(ENV['MAX_LEVEL'])
+        @congratulations = true
       elsif @current_level > @user_level
         flash[:alert] = "Oops, you haven't reach level #{@current_level} yet...."
         @current_level = @user_level
@@ -27,8 +29,8 @@ class ProblemsController < ApplicationController
       if @current_level == current_user.level && accepted_status.length == @problems.length
         @level_up = true
       else
-        failed_status = current_user.submissions.select(:problem_id).uniq.where(:problem_id => @problems)
-        failed_status.each { |submission|  @status[submission.problem_id] ||= :failed }
+        opened_status = current_user.submissions.select(:problem_id).uniq.where(:problem_id => @problems)
+        opened_status.each { |submission|  @status[submission.problem_id] ||= :failed }
         @problems.each { |problem| @status[problem.id] ||= :unopened }
       end
     end
