@@ -1,4 +1,4 @@
-<% if @level_up && current_user.level < Integer(ENV['MAX_LEVEL'])%>
+<% if @level_up && current_user.level <= Integer(ENV['MAX_LEVEL'])%>
   <%= button_to 'LEVEL UP!', user_path(current_user), :class => 'btn btn-success pull-right' %>
 <% end %>
 <h2>Level <%= @current_level %></h2>
@@ -27,31 +27,16 @@
 </table>
 <div class="pagination pagination-centered">
   <ul>
-    <% if @current_level == 0 %>
-      <li class="disabled"><span>«</span></li>
-    <% else %>
-      <li>
-      <a href="<%= "#{problems_path}?level=#{@current_level - 1}" %>">«</a>
-      </li>
-    <% end %>
     <li class="disabled"><span>Level</span></li>
-    <% (0..Integer(ENV['MAX_LEVEL'])).each do |l| %>
-      <% if @user_level < l %>
-        <li class="disabled"><span><%= l %></span></li>
-      <% elsif @current_level == l %>
-        <li class="active"><span><%= "#{l}" %></span></li>
+    <% (0..@user_level).each do |l| %>
+      <% if l == @current_level %>
+        <li class="active"><span><%= l %></span></li>
       <% else %>
         <li>
         <a href="<%= "#{problems_path}?level=#{l}" %>"><%= l %></a>
         </li>
       <% end %>
     <% end %>
-    <% if @current_level == @user_level || @current_level == Integer(ENV['MAX_LEVEL']) %>
-      <li class="disabled"><span>»</span></li>
-    <% else %>
-      <li>
-      <a href="<%= "#{problems_path}?level=#{@current_level + 1}" %>">»</a>
-      </li>
-    <% end %>
+    <li class="disabled"><span><i class="icon-lock"></i></span></li>
   </ul>
 </div>

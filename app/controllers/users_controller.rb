@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def level_up
     @user = User.find_by_handle(params[:user_id])
-    if @user.level >= Integer(ENV['MAX_LEVEL'])
+    if @user.level > Integer(ENV['MAX_LEVEL'])
       redirect_to problems_path, :notice => "Hey, you have already reached the top level!"
     elsif @user.level_up
       redirect_to problems_path, :notice => "Congratulations! You got level up!"
