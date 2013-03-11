@@ -1,0 +1,37 @@
+<h2>Code</h2>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Problem</th>
+      <th>Status</th>
+      <th>Time</th>
+      <th>Memory</th>
+      <th>Language</th>
+      <th>Submit Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @submission.id %></td>
+      <td><%= link_to @submission.user.handle, user_path(@submission.user) %></td>
+      <td><center><%= link_to @submission.problem_id, problem_path(@submission.problem_id) %></center></td>
+      <td>
+        <% status = status_list.invert[@submission.status] %>
+        <% if user_signed_in? && (current_user.has_role?(:admin) || @submission.user_id == current_user.id) && status == "Compile Error" %>
+          <%= link_to "Compile Error", submission_compile_error_path(@submission), :class => "btn btn-warning btn-mini" %>
+        <% else %>
+          <span class="label label-<%= show_submission_status(status) %>">
+            <%= status %>
+          </span>
+        <% end %>
+      </td>
+      <td><%= "#{@submission.time}ms" if @submission.time %></td>
+      <td><%= "#{@submission.memory}KB" if @submission.memory %></td>
+      <td><%= language_list.invert[@submission.language] %></td>
+      <td><%= @submission.created_at.localtime.to_s(:db) %></td>
+    </tr>
+  </tbody>
+</table>
+<pre><%= @submission.code %></pre>
