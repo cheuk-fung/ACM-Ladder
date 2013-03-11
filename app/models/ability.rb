@@ -7,7 +7,7 @@ class Ability
       can :manage, :all
     elsif user.has_role? :user
       can :read, :all
-      can [:create, :compile_error], Submission
+      can [:create, :compile_error, :show_code], Submission
       can :level_up, User
     else
       can :read, :all

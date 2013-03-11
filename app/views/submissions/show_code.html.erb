@@ -22,7 +22,7 @@
         <% if user_signed_in? && (current_user.has_role?(:admin) || @submission.user_id == current_user.id) && status == "Compile Error" %>
           <%= link_to "Compile Error", submission_compile_error_path(@submission), :class => "btn btn-warning btn-mini" %>
         <% else %>
-          <span class="label label-<%= show_submission_status(status) %>">
+          <span class="label label-<%= get_submission_status(status) %>">
             <%= status %>
           </span>
         <% end %>
@@ -34,4 +34,4 @@
     </tr>
   </tbody>
 </table>
-<pre><%= @submission.code %></pre>
+<%= CodeRay.scan(@submission.code, language_symbol[language_list.invert[@submission.language]]).div.html_safe %>

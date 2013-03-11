@@ -7,6 +7,10 @@ module ApplicationHelper
     { "C" => 0, "C++" => 1, "Java" => 2, "Pascal" => 3 }
   end
 
+  def language_symbol
+    { "C" => :c, "C++" => :cpp, "Java" => :java, "Pascal" => :pascal }
+  end
+
   def status_list
     { "Waiting"			=> 0,
       "Compiling"		=> 1,

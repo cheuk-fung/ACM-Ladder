@@ -25,14 +25,20 @@
           <% if user_signed_in? && (current_user.has_role?(:admin) || submission.user_id == current_user.id) && status == "Compile Error" %>
             <%= link_to "Compile Error", submission_compile_error_path(submission), :class => "btn btn-warning btn-mini" %>
           <% else %>
-            <span class="label label-<%= show_submission_status(status) %>">
+            <span class="label label-<%= get_submission_status(status) %>">
               <%= status %>
             </span>
           <% end %>
         </td>
         <td><%= "#{submission.time}ms" if submission.time %></td>
         <td><%= "#{submission.memory}KB" if submission.memory %></td>
-        <td><%= link_to languages[submission.language], submission_show_code_path(submission) %></td>
+        <td>
+          <% if user_signed_in? && (current_user.has_role?(:admin) || submission.user_id == current_user.id) %>
+            <%= link_to languages[submission.language], submission_show_code_path(submission) %>
+          <% else %>
+            <%= languages[submission.language] %>
+          <% end %>
+        </td>
         <td><%= submission.created_at.localtime.to_s(:db) %></td>
       </tr>
     <% end %>

@@ -1,5 +1,5 @@
 module SubmissionsHelper
-  def show_submission_status(status)
+  def get_submission_status(status)
     case status
     when "Waiting" then ""
     when "Compiling", "Running" then "info"
