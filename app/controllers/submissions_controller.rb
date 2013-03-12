@@ -13,7 +13,12 @@ class SubmissionsController < ApplicationController
       flash[:alert] = "Kidding? The page you tell me is not a number!"
       @current_page = 1
     end
-    @submissions = Submission.offset((@current_page - 1) * 10).last(10).reverse
+    if params[:user_id]
+      user = User.find_by_handle(params[:user_id])
+      @submissions = user.submissions.offset((@current_page - 1) * 10).last(10).reverse
+    else
+      @submissions = Submission.offset((@current_page - 1) * 10).last(10).reverse
+    end
   end
 
   def new

@@ -18,9 +18,7 @@
       <%= @solved.count %>
     </span>
   <% else %>
-    <a href="#solved" class="label label-success" data-toggle="collapse">
-      <%= @solved.count %>
-    </a>
+    <%= link_to @solved.count, "#solved", :class => "label label-success", :data => { :toggle => "collapse" } %>
     <div id="solved" class="collapse">
       <ul class="inline well well-small">
         <% @solved.each do |id| %>
@@ -39,9 +37,7 @@
       <%= @failed.count %>
     </span>
   <% else %>
-    <a href="#failed" class="label label-warning" data-toggle="collapse">
-      <%= @failed.count %>
-    </a>
+    <%= link_to @failed.count, "#failed", :class => "label label-warning", :data => { :toggle => "collapse" } %>
     <div id="failed" class="collapse">
       <ul class="inline well well-small">
         <% @failed.each do |id| %>
@@ -54,9 +50,13 @@
   <% end %>
   <dt>Submitted</dt>
   <dd>
-  <span class="label label-info">
-    <%= @submitted.count %>
-  </span>
+  <% if @submitted.count == 0 %>
+    <span class="label label-info">
+      <%= @submitted.count %>
+    </span>
+  <% else %>
+    <%= link_to @submitted.count, user_submissions_path(current_user), :class => "label label-info" %>
+  <% end %>
   </dd>
   <dt>Member Since</dt>
   <dd><%= @user.created_at.localtime.to_s(:rfc822) %></dd>
