@@ -50,12 +50,12 @@
 <ul class="pager">
   <% if @current_page > 1 %>
     <li class="previous">
-    <a href="<%= "#{submissions_path}?page=#{@current_page - 1}" %>">&larr; Previous</a>
+    <a href="<%= "?page=#{@current_page - 1}" %>">&larr; Previous</a>
     </li>
   <% end %>
   <% unless @submissions.empty? %>
     <li class="next">
-    <a href="<%= "#{submissions_path}?page=#{@current_page + 1}" %>">Next &rarr;</a>
+    <a href="<%= "?page=#{@current_page + 1}" %>">Next &rarr;</a>
     </li>
   <% end %>
 </ul>

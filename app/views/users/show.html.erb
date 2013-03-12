@@ -55,7 +55,7 @@
       <%= @submitted.count %>
     </span>
   <% else %>
-    <%= link_to @submitted.count, user_submissions_path(current_user), :class => "label label-info" %>
+    <%= link_to @submitted.count, user_submissions_path(@user), :class => "label label-info" %>
   <% end %>
   </dd>
   <dt>Member Since</dt>
