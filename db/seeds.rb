@@ -11,8 +11,7 @@ puts "Creating default admin account..."
 user = User.find_or_create_by_handle(:handle => ENV['ADMIN_HANDLE'].dup,
                                      :email => ENV['ADMIN_EMAIL'].dup,
                                      :password => ENV['ADMIN_PASSWORD'].dup,
-                                     :password_confirmation => ENV['ADMIN_PASSWORD'].dup,
-                                     :level => Integer(ENV['MAX_LEVEL']))
+                                     :password_confirmation => ENV['ADMIN_PASSWORD'].dup)
 user.add_role :admin
 user.remove_role :user
 puts "Created admin: " << user.handle

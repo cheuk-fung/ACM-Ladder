@@ -2,7 +2,7 @@ class ProblemsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @user_level = user_signed_in? ? current_user.level : 0
+    @user_level = user_signed_in? ? (current_user.has_role?(:admin) ? Integer(ENV['MAX_LEVEL']) : current_user.level) : 0
     params[:level] ||= @user_level
     begin
       @current_level = Integer(params[:level])
@@ -65,7 +65,7 @@ class ProblemsController < ApplicationController
   end
 
   def show
-    user_level = user_signed_in? ? current_user.level : 0
+    user_level = user_signed_in? ? (current_user.has_role?(:admin) ? @problem.level : current_user.level) : 0
     if user_level < @problem.level
       redirect_to problems_path, :alert => "Oops, you are not powerful enough to view this problem...."
     end
