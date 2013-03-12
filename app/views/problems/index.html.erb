@@ -1,7 +1,13 @@
 <% if @congratulations %>
+  <% content_for :title do %>
+    <% "Congratulations" %>
+  <% end %>
   <h2>Congratulations!</h2>
   <p>You have finished all available levels.</p>
 <% else %>
+  <% content_for :title do %>
+    <% "Level #{@current_level}" %>
+  <% end %>
   <% if @level_up && current_user.level <= Integer(ENV['MAX_LEVEL'])%>
     <%= button_to 'LEVEL UP!', user_path(current_user), :class => 'btn btn-success pull-right' %>
   <% end %>

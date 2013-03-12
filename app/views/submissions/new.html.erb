@@ -1,3 +1,6 @@
+<% content_for :title do %>
+  <% "Submit Problem #{@problem.id}" %>
+<% end %>
 <%= simple_form_for [@problem, @submission] do |form| %>
   <fieldset>
     <legend>Submit Problem <%= @problem.id %></legend>

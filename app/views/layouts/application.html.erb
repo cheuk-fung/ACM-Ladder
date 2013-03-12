@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "ACM Ladder" %></title>
+    <title><%= content_for?(:title) ? yield(:title) + " &larr; ACM Ladder".html_safe : "ACM Ladder" %></title>
     <meta name="description" content="A level-based ACM-ICPC training site.">
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
