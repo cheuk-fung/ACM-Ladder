@@ -21,10 +21,7 @@ ACMLadder::Application.routes.draw do
     get 'submit' => 'submissions#new'
   end
 
-  resources :submissions do
-    get 'compile_error' => 'submissions#compile_error'
-    get 'show_code' => 'submissions#show_code'
-  end
+  resources :submissions
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

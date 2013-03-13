@@ -39,17 +39,7 @@ class SubmissionsController < ApplicationController
     end
   end
 
-  def compile_error
-    @submission = Submission.find(params[:submission_id])
-    if @submission.user_id != current_user.id && current_user.has_role?(:user)
-      redirect_to submissions_path, :alert => "It's not for you..."
-    elsif @submission.status != ApplicationController.helpers.status_list["Compile Error"]
-      redirect_to submissions_path, :alert => "The status of submission #{@submission.id} is not Compile Error..."
-    end
-  end
-
-  def show_code
-    @submission = Submission.find(params[:submission_id])
+  def show
     if @submission.user_id != current_user.id && current_user.has_role?(:user)
       redirect_to submissions_path, :alert => "It's not for you..."
     end

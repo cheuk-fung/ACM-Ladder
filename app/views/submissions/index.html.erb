@@ -26,7 +26,7 @@
         <td>
           <% status = status_list.invert[submission.status] %>
           <% if user_signed_in? && (current_user.has_role?(:admin) || submission.user_id == current_user.id) && status == "Compile Error" %>
-            <%= link_to "Compile Error", submission_compile_error_path(submission), :class => "btn btn-warning btn-mini" %>
+            <%= link_to "Compile Error", submission_path(submission), :class => "btn btn-warning btn-mini" %>
           <% else %>
             <span class="label label-<%= get_submission_status(status) %>">
               <%= status %>
@@ -37,7 +37,7 @@
         <td><%= "#{submission.memory}KB" if submission.memory %></td>
         <td>
           <% if user_signed_in? && (current_user.has_role?(:admin) || submission.user_id == current_user.id) %>
-            <%= link_to languages[submission.language], submission_show_code_path(submission) %>
+            <%= link_to languages[submission.language], submission_path(submission) %>
           <% else %>
             <%= languages[submission.language] %>
           <% end %>
