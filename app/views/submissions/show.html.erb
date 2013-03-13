@@ -21,14 +21,14 @@
       <td><%= link_to @submission.user.handle, user_path(@submission.user) %></td>
       <td><center><%= link_to @submission.problem_id, problem_path(@submission.problem_id) %></center></td>
       <td>
-        <% status = status_list.invert[@submission.status] %>
+        <% status = OJ::StatusName[@submission.status] %>
         <span class="label label-<%= get_submission_status(status) %>">
           <%= status %>
         </span>
       </td>
       <td><%= "#{@submission.time}ms" if @submission.time %></td>
       <td><%= "#{@submission.memory}KB" if @submission.memory %></td>
-      <td><%= language_list.invert[@submission.language] %></td>
+      <td><%= OJ::LanguageName[@submission.language] %></td>
       <td><%= @submission.created_at.localtime.to_s(:db) %></td>
     </tr>
   </tbody>
@@ -36,4 +36,4 @@
 <% if status == "Compile Error" %>
  <pre><%= @submission.error.html_safe %></pre>
 <% end %>
-<%= CodeRay.scan(@submission.code, language_symbol[language_list.invert[@submission.language]]).div.html_safe %>
+<%= CodeRay.scan(@submission.code, OJ::LanguageSymbol[@submission.language]).div.html_safe %>

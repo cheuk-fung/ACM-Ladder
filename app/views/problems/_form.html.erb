@@ -1,7 +1,7 @@
 <%= simple_form_for @problem, :html => { :class => "form-horizontal" } do |form| %>
   <fieldset>
     <legend><%= @problem.id ? "Edit Problem" : "Add New Problem" %></legend>
-    <%= form.input :source, :collection => source_list, :disabled => @problem.id != nil %>
+    <%= form.input :source, :collection => OJ::SourceList, :disabled => @problem.id != nil %>
     <%= form.input :original_id, :label => "ID", :disabled => @problem.id != nil %>
     <%= form.input :level, :collection => 0..Integer(ENV['MAX_LEVEL']) %>
   </fieldset>

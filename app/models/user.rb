@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def level_up
-    accepted = ApplicationController.helpers.status_list["Accepted"]
+    accepted = OJ::StatusDict["Accepted"]
     problem_count = Problem.where(:level => self.level).count
     solved_count = submissions.joins(:problem).select('`problems`.`id`').where(:problems => { :level => self.level }, :status => accepted).count(:distinct => true)
     if solved_count == problem_count

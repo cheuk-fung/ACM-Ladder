@@ -31,7 +31,7 @@ class SubmissionsController < ApplicationController
     @submission.user = current_user
 
     if @submission.save
-      @submission.submit	# delayed job
+      OJ.submit(@submission)	# delayed job
       redirect_to submissions_path, :notice => "Submit successfully."
     else
       flash[:alert] = "Failed to submit."
