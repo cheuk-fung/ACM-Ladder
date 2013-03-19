@@ -1,3 +1,9 @@
+<% if flash.empty? %>
+  <div class="alert alert-block">
+    <h4 class="alert-heading">Announcement</h4>
+    Customize me at app/views/layouts/_messages.html.erb ;-)
+  </div>
+<% end %>
 <% flash.each do |name, msg| %>
   <% if msg.is_a?(String) %>
     <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
