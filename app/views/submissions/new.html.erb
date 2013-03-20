@@ -3,7 +3,31 @@
 <% end %>
 <%= simple_form_for [@problem, @submission] do |form| %>
   <fieldset>
-    <legend>Submit Problem <%= @problem.id %></legend>
+    <h4>Submit Problem <%= @problem.id %> - <%= @problem.title %></h4>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>
+            <strong>Source</strong>
+          </td>
+          <td class="text-info">
+            <%= "#{@problem.source} #{@problem.original_id}" %>
+          </td>
+          <td>
+            <strong>Time Limit</strong>
+          </td>
+          <td class="text-warning">
+            <%= @problem.time_limit %>MS
+          </td>
+          <td>
+            <strong>Memory Limit</strong>
+          </td>
+          <td class="text-warning">
+            <%= @problem.memory_limit %>KB
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <%= form.input :language, :collection => OJ.language_collection(@problem) %>
     <%= form.input :code, :input_html => { :class => "span8" } %>
   </fieldset>
