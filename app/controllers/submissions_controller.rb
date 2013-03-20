@@ -32,7 +32,7 @@ class SubmissionsController < ApplicationController
 
     if @submission.save
       OJ.submit(@submission)	# delayed job
-      redirect_to submissions_path, :notice => "Submit successfully."
+      redirect_to user_submissions_path(current_user), :notice => "Submit successfully."
     else
       flash[:alert] = "Failed to submit."
       render :action => :new
