@@ -12,3 +12,4 @@ TODO LIST
 - 在 Submission Detail 页面中加入 quick edit 的链接，重定向至预填充此次提交信息的 submit 页面
 - submit 页面中的代码框使用等宽字体，或者替换成在线代码编辑器
 - UI 上的改进，或重新设计
+- 设计 404 页面
