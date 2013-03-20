@@ -49,6 +49,15 @@ module OJ
       end
     end
     handle_asynchronously :submit, :queue => "submit"
+
+    def language_collection(problem)
+      case problem.source
+      when "POJ"
+        POJ::LanguageDict
+      when "NKOJ"
+        NKOJ::LanguageDict
+      end
+    end
   end
 end
 
