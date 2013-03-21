@@ -48,6 +48,10 @@ Getting Started[Rough Version]
 
     rake db:setup
 
+### Create `tmp` Directories
+
+    rake tmp:create
+
 ### Start `delayed_job` Daemon
 
     script/delayed_job start
