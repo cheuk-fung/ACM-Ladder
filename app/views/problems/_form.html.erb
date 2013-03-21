@@ -3,7 +3,8 @@
     <legend><%= @problem.id ? "Edit Problem" : "Add New Problem" %></legend>
     <%= form.input :source, :collection => OJ::SourceList, :disabled => @problem.id != nil %>
     <%= form.input :original_id, :label => "ID", :disabled => @problem.id != nil %>
-    <%= form.input :level, :collection => 0..Integer(ENV['MAX_LEVEL']) %>
+    <%- # level -1 for hiding unused problems -%>
+    <%= form.input :level, :collection => -1..Integer(ENV['MAX_LEVEL']) %>
   </fieldset>
   <div class="form-actions">
       <%= form.submit @problem.id ? "Update" : "Create", :class => "btn btn-primary" %>
