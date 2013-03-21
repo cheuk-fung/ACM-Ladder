@@ -5,7 +5,7 @@ HOST:		""
 # Set site admin account credentials.
 ADMIN_HANDLE:	""
 ADMIN_EMAIL:	""
-ADMIN_PASSWORD:	""
+ADMIN_PASSWORD:	""	# At least 6 characters.
 
 # Set gmail account credentials for action mailer.
 GMAIL_USERNAME:	""
