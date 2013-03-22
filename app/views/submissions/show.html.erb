@@ -7,10 +7,8 @@
     <tr>
       <th>ID</th>
       <th>User</th>
-      <th>Problem</th>
+      <th><center>Problem</center></th>
       <th>Status</th>
-      <th>Time</th>
-      <th>Memory</th>
       <th>Language</th>
       <th>Submit Time</th>
     </tr>
@@ -19,15 +17,19 @@
     <tr>
       <td><%= @submission.id %></td>
       <td><%= link_to @submission.user.handle, user_path(@submission.user) %></td>
-      <td><center><%= link_to @submission.problem_id, problem_path(@submission.problem_id) %></center></td>
+      <td><center>
+          <div class="problem-label">
+            <%= link_to @submission.problem.level, "#{problems_path}?level=#{@submission.problem.level}", :class => "label label-info" %>
+            :
+            <%= link_to @submission.problem_id, problem_path(@submission.problem_id), :class => "label label-success" %>
+          </div>
+      </center></td>
       <td>
         <% status = OJ::StatusName[@submission.status] %>
         <span class="label label-<%= get_submission_status(status) %>">
           <%= status %>
         </span>
       </td>
-      <td><%= "#{@submission.time}ms" if @submission.time %></td>
-      <td><%= "#{@submission.memory}KB" if @submission.memory %></td>
       <td><%= OJ::LanguageName[@submission.language] %></td>
       <td><%= @submission.created_at.localtime.to_s(:db) %></td>
     </tr>
