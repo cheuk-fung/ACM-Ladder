@@ -7,7 +7,7 @@
     <tr>
       <th>ID</th>
       <th>User</th>
-      <th><center>Problem</center></th>
+      <th>Problem</th>
       <th>Status</th>
       <th>Language</th>
       <th>Submit Time</th>
@@ -17,13 +17,13 @@
     <tr>
       <td><%= @submission.id %></td>
       <td><%= link_to @submission.user.handle, user_path(@submission.user) %></td>
-      <td><center>
-          <div class="problem-label">
-            <%= link_to @submission.problem.level, "#{problems_path}?level=#{@submission.problem.level}", :class => "label label-info" %>
-            :
-            <%= link_to @submission.problem_id, problem_path(@submission.problem_id), :class => "label label-success" %>
-          </div>
-      </center></td>
+      <td>
+        <div class="problem-label">
+          <%= link_to @submission.problem.level, "#{problems_path}?level=#{@submission.problem.level}", :class => "label label-info" %>
+          :
+          <%= link_to @submission.problem_id, problem_path(@submission.problem_id), :class => "label label-success" %>
+        </div>
+      </td>
       <td>
         <% status = OJ::StatusName[@submission.status] %>
         <span class="label label-<%= get_submission_status(status) %>">
