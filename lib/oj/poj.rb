@@ -33,8 +33,9 @@ module POJ
 
       sleep 1
 
-      submission.status = 0 # for rejudge
-      while submission.status <= 2 # waiting, compiling or running
+      submission.original_id = nil	# for rejudge
+      submission.status = 0		# for rejudge
+      while submission.status <= 2	# waiting, compiling or running
         doc = Hpricot(open("#{BaseURL}/status?problem_id=#{submission.problem.original_id}&user_id=#{Handle}"))
         result = doc.search("table")[4].search("tr")[1].search("td")
 
