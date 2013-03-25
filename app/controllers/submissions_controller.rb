@@ -23,6 +23,7 @@ class SubmissionsController < ApplicationController
 
   def new
     @problem = Problem.find(params[:problem_id])
+    @submission.language = session[:lang]
   end
 
   def create
@@ -31,6 +32,7 @@ class SubmissionsController < ApplicationController
     @submission.user = current_user
 
     if @submission.save
+      session[:lang] = @submission.language
       OJ.submit(@submission)	# delayed job
       redirect_to user_submissions_path(current_user), :notice => "Submit successfully."
     else

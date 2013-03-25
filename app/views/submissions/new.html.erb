@@ -28,7 +28,7 @@
         </tr>
       </tbody>
     </table>
-    <%= form.input :language, :collection => OJ.language_collection(@problem) %>
+    <%= form.input :language, :collection => OJ.language_collection(@problem), :selected => session[:lang] %>
     <%= form.input :code, :input_html => { :class => "span8" } %>
   </fieldset>
   <div class="form-actions">

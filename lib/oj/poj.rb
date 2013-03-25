@@ -9,7 +9,7 @@ module POJ
 
   lid = OJ::LanguageID
   LanguageDict = { "C (gcc)" => lid[:c], "C++ (g++)" => lid[:cpp], "Java (jdk6)" => lid[:java], "Pascal (fpc)" => lid[:pascal] }
-  LanguageSubmitID = { lid[:cpp] => 0, lid[:c] => 1, lid[:jave] => 2, lid[:pascal] => 3 }
+  LanguageSubmitID = { lid[:cpp] => 0, lid[:c] => 1, lid[:java] => 2, lid[:pascal] => 3 }
 
   class << self
     def submit(submission)
@@ -33,6 +33,7 @@ module POJ
 
       sleep 1
 
+      submission.status = 0 # for rejudge
       while submission.status <= 2 # waiting, compiling or running
         doc = Hpricot(open("#{BaseURL}/status?problem_id=#{submission.problem.original_id}&user_id=#{Handle}"))
         result = doc.search("table")[4].search("tr")[1].search("td")
