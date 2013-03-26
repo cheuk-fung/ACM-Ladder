@@ -41,6 +41,7 @@ class ProblemsController < ApplicationController
   end
 
   def create
+    @problem.exp = 1 << @problem.exp
     OJ.fetch(@problem)
 
     if @problem.save
@@ -52,10 +53,12 @@ class ProblemsController < ApplicationController
   end
 
   def edit
+    @problem.exp = Integer(Math.log2(@problem.exp))
   end
 
   def update
     @problem.level = params[:problem][:level]
+    @problem.exp = 1 << params[:problem][:exp].to_i
 
     if @problem.save
       redirect_to problem_path(@problem), :notice => "Problem was successfully updated."
