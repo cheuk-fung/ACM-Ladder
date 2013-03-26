@@ -1,8 +1,8 @@
 <%= simple_form_for :setting, :method => 'put', :html => { :class => "form-horizontal" } do |form| %>
   <fieldset>
     <legend>Site Settings</legend>
-    <%= form.input :max_level, :label => "Max Level", :as => :integer, :required => false, :placeholder => Setting.find_by_key("MAX_LEVEL").value %>
-    <%= form.input :show_announcement, :label => "Show Announcement", :as => :boolean, :required => false, :input_html => { :checked => Setting.find_by_key("SHOW_ANNOUNCEMENT").value == "1" } %>
+    <%= form.input :max_level, :label => "Max Level", :as => :integer, :required => false, :placeholder => get_max_level.to_s %>
+    <%= form.input :show_announcement, :label => "Show Announcement", :as => :boolean, :required => false, :input_html => { :checked => show_announcement } %>
     <%= form.input :announcement, :as => :text, :required => false, :hint => "You can use HTML labels here at your own risk.", :input_html => { :value => get_announcement, :class => "span6", :rows => "5" } %>
   </fieldset>
   <div class="form-actions">

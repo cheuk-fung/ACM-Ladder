@@ -7,7 +7,6 @@ TODO LIST
 - 站内信息
 - Ranking List
 - 显示所有隐藏题目的页面
-- 增加修改网站设置（如公告，level 上限等）的 model
 - OJ 模块进一步抽象
 - 支持更多 OJ
 - POJ/NKOJ 模块中加入异常处理

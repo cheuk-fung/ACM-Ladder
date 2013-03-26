@@ -1,5 +1,4 @@
-<% announcement = get_announcement %>
-<% if !announcement.blank? && flash.empty? %>
+<% if show_announcement && !((announcement = get_announcement).blank?) && flash.empty? %>
   <div class="alert alert-block">
     <h4 class="alert-heading">Announcement</h4>
     <%= announcement.html_safe %>
