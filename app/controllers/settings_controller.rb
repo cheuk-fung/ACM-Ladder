@@ -3,16 +3,8 @@ class SettingsController < ApplicationController
 
   def update
     errors = 0
-
-    unless params[:setting][:max_level].blank?
-      begin
-        max_level = Integer(params[:setting][:max_level])
-        Setting.find_by_key("MAX_LEVEL") { |s| s.value = max_level }.save
-      rescue ArgumentError
-        errors += 1
-        flash[:alert_max_level] = "Kidding? The level you tell me is not a number!"
-      end
-    end
+    errors += 1 unless update_int("MAX_LEVEL", params[:setting][:max_level], "Kidding? The level you tell me is not a number!")
+    errors += 1 unless update_int("MAX_DIFFICULTY", params[:setting][:max_difficulty], "Kidding? The difficulty you tell me is not a number!")
 
     Setting.find_by_key("SHOW_ANNOUNCEMENT") { |s| s.value = params[:setting][:show_announcement] }.save
     if Setting.where(:key => "ANNOUNCEMENT").last.value != params[:setting][:announcement]
@@ -24,5 +16,20 @@ class SettingsController < ApplicationController
     else
       render :action => :edit
     end
+  end
+
+  private
+  def update_int(key, value, error_msg)
+    unless value.blank?
+      begin
+        value = Integer(value)
+        Setting.find_by_key(key) { |s| s.value = value }.save
+      rescue ArgumentError
+        flash[:"alert_#{key.downcase}"] = error_msg
+        return false
+      end
+    end
+
+    true
   end
 end

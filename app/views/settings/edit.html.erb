@@ -2,6 +2,7 @@
   <fieldset>
     <legend>Site Settings</legend>
     <%= form.input :max_level, :label => "Max Level", :as => :integer, :required => false, :placeholder => get_max_level.to_s %>
+    <%= form.input :max_difficulty, :label => "Max Difficulty", :as => :integer, :required => false, :placeholder => get_max_difficulty.to_s %>
     <%= form.input :show_announcement, :label => "Show Announcement", :as => :boolean, :required => false, :input_html => { :checked => show_announcement } %>
     <%= form.input :announcement, :as => :text, :required => false, :hint => "You can use HTML labels here at your own risk.", :input_html => { :value => get_announcement, :class => "span6", :rows => "5" } %>
   </fieldset>

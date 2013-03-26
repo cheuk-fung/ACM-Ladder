@@ -5,6 +5,7 @@
     <%= form.input :original_id, :label => "ID", :disabled => @problem.id != nil %>
     <%- # level -1 for hiding unused problems -%>
     <%= form.input :level, :collection => -1..get_max_level %>
+    <%= form.input :exp, :label => "Difficulty", :collection => 0..get_max_difficulty %>
   </fieldset>
   <div class="form-actions">
       <%= form.submit @problem.id ? "Update" : "Create", :class => "btn btn-primary" %>
