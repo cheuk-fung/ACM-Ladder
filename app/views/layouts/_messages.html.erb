@@ -1,7 +1,8 @@
-<% if flash.empty? %>
+<% announcement = get_announcement %>
+<% if !announcement.blank? && flash.empty? %>
   <div class="alert alert-block">
     <h4 class="alert-heading">Announcement</h4>
-    Customize me at app/views/layouts/_messages.html.erb ;-)
+    <%= announcement.html_safe %>
   </div>
 <% end %>
 <% flash.each do |name, msg| %>

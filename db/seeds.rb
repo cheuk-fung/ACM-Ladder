@@ -19,3 +19,7 @@ puts "Created admin: " << user.handle
 puts "Initializing default configurations..."
 puts "\tMAX_LEVEL => 0"
 Setting.find_or_create_by_key(:key => "MAX_LEVEL", :value => 0)
+puts "\tSHOW_ANNOUNCEMENT => 0"
+Setting.find_or_create_by_key(:key => "SHOW_ANNOUNCEMENT", :value => 0)
+puts "\tANNOUNCEMENT => \"\""
+Setting.find_or_create_by_key(:key => "ANNOUNCEMENT", :value => "")
