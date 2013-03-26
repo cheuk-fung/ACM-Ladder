@@ -22,8 +22,3 @@ MAX_LEVEL:	10
 
 # Set link for "Fork me on GitHub" ribbon.
 GITHUB_LINK:	""
-
-# Set footer information.
-# Modifiy the footer seciton in app/views/layouts/application.html.erb
-# if you need advanced customization.
-FOOTER:		'Powered by <a href=""></a>'
