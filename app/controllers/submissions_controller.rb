@@ -42,7 +42,7 @@ class SubmissionsController < ApplicationController
   end
 
   def show
-    if @submission.user_id != current_user.id && current_user.has_role?(:user)
+    if @submission.user_id != current_user.id && !current_user.has_role?(:admin)
       redirect_to submissions_path, :alert => "It's not for you..."
     end
   end
