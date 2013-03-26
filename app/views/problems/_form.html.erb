@@ -4,7 +4,7 @@
     <%= form.input :source, :collection => OJ::SourceList, :disabled => @problem.id != nil %>
     <%= form.input :original_id, :label => "ID", :disabled => @problem.id != nil %>
     <%- # level -1 for hiding unused problems -%>
-    <%= form.input :level, :collection => -1..Integer(ENV['MAX_LEVEL']) %>
+    <%= form.input :level, :collection => -1..Setting.find_by_key("MAX_LEVEL").value.to_i %>
   </fieldset>
   <div class="form-actions">
       <%= form.submit @problem.id ? "Update" : "Create", :class => "btn btn-primary" %>

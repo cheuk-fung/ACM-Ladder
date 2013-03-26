@@ -17,9 +17,6 @@ POJ_PASSWORD:	""
 NKOJ_HANDLE:	""
 NKOJ_PASSWORD:	""
 
-# Set max problem level.
-MAX_LEVEL:	10
-
 # Set link for "Fork me on GitHub" ribbon.
 GITHUB_LINK:	""
 

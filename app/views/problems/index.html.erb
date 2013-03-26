@@ -8,7 +8,7 @@
   <% content_for :title do %>
     <% "Level #{@current_level}" %>
   <% end %>
-  <% if @level_up && current_user.level <= Integer(ENV['MAX_LEVEL'])%>
+  <% if @level_up && current_user.level <= Setting.find_by_key("MAX_LEVEL").value.to_i %>
     <%= button_to 'LEVEL UP!', user_level_up_path(current_user), :class => 'btn btn-success pull-right' %>
   <% end %>
   <h2>Level <%= @current_level %></h2>
@@ -38,7 +38,7 @@
   <div class="pagination pagination-centered">
     <ul>
       <li class="disabled"><span>Level</span></li>
-      <% (0..[@user_level, Integer(ENV['MAX_LEVEL'])].min).each do |l| %>
+      <% ([@user_level, Setting.find_by_key("MAX_LEVEL").value.to_i].min + 1).times do |l| %>
         <% if l == @current_level %>
           <li class="active"><span><%= l %></span></li>
         <% else %>

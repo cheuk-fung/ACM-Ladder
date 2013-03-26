@@ -2,14 +2,15 @@ class ProblemsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @user_level = user_signed_in? ? (current_user.has_role?(:admin) ? Integer(ENV['MAX_LEVEL']) : current_user.level) : 0
+    max_level = Setting.find_by_key("MAX_LEVEL").value.to_i
+    @user_level = user_signed_in? ? (current_user.has_role?(:admin) ? max_level : current_user.level) : 0
     params[:level] ||= @user_level
     begin
       @current_level = Integer(params[:level])
       if @current_level < 0
         flash[:alert] = "Kidding? The level you tell me is negative!"
         @current_level = @user_level
-      elsif @current_level > Integer(ENV['MAX_LEVEL']) && @user_level > Integer(ENV['MAX_LEVEL'])
+      elsif @current_level > max_level && @user_level > max_level
         @congratulations = true
       elsif @current_level > @user_level
         flash[:alert] = "Oops, you haven't reach level #{@current_level} yet...."
