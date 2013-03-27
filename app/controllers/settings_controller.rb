@@ -24,6 +24,7 @@ class SettingsController < ApplicationController
       begin
         value = Integer(value)
         Setting.find_by_key(key) { |s| s.value = value }.save
+        (value + 1).times { |level| Setting.find_or_create_by_key(:key => "EXP_L#{level}", :value => 0) } if key == "MAX_LEVEL"
       rescue ArgumentError
         flash[:"alert_#{key.downcase}"] = error_msg
         return false

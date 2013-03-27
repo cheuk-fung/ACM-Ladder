@@ -45,6 +45,7 @@ class ProblemsController < ApplicationController
     OJ.fetch(@problem)
 
     if @problem.save
+      Setting.update_exp
       redirect_to problem_path(@problem), :notice => "Problem was successfully created."
     else
       flash[:alert] = "Failed to create problem."
@@ -61,6 +62,7 @@ class ProblemsController < ApplicationController
     @problem.exp = 1 << params[:problem][:exp].to_i
 
     if @problem.save
+      Setting.update_exp
       redirect_to problem_path(@problem), :notice => "Problem was successfully updated."
     else
       flash[:alert] = "Failed to edit problem."
