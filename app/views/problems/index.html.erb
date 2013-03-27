@@ -8,9 +8,6 @@
   <% content_for :title do %>
     <% "Level #{@current_level}" %>
   <% end %>
-  <% if @level_up && current_user.level <= get_max_level %>
-    <%= button_to 'LEVEL UP!', user_level_up_path(current_user), :class => 'btn btn-success pull-right' %>
-  <% end %>
   <h2>Level <%= @current_level %></h2>
   <% if user_signed_in? && @current_level == current_user.level %>
     <div class="progress">

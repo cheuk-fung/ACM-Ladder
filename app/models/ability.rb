@@ -10,7 +10,6 @@ class Ability
       cannot :show, Setting
 
       can :create, Submission
-      can :level_up, User
     else
       can :read, :all
       cannot :show, [Submission, Setting]

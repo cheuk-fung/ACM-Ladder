@@ -25,15 +25,11 @@ class ProblemsController < ApplicationController
     @status = []
     if user_signed_in?
       accepted = OJ::StatusDict["Accepted"]
-      accepted_status = current_user.submissions.select(:problem_id).uniq.where(:problem_id => @problems, :status => accepted)
+      accepted_status = current_user.submissions.where(:problem_id => @problems, :status => accepted).select(:problem_id).uniq
       accepted_status.each { |submission| @status[submission.problem_id] = :accepted }
-      if @current_level == current_user.level && accepted_status.length == @problems.length
-        @level_up = true
-      else
-        opened_status = current_user.submissions.select(:problem_id).uniq.where(:problem_id => @problems)
-        opened_status.each { |submission|  @status[submission.problem_id] ||= :failed }
-        @problems.each { |problem| @status[problem.id] ||= :unopened }
-      end
+      opened_status = current_user.submissions.where(:problem_id => @problems).select(:problem_id).uniq
+      opened_status.each { |submission| @status[submission.problem_id] ||= :failed }
+      @problems.each { |problem| @status[problem.id] ||= :unopened }
     end
   end
 

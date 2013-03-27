@@ -47,6 +47,14 @@ module OJ
       when "NKOJ"
         NKOJ.submit(submission)
       end
+
+      current_user = submission.user
+      accepted = StatusDict["Accepted"]
+      count = current_user.submissions.where(:problem_id => submission.problem, :status => accepted).count
+      if submission.status == accepted && count == 1
+        current_user.add_exp(submission.problem.exp)
+        current_user.level_up
+      end
     end
     handle_asynchronously :submit, :queue => "submit"
 
