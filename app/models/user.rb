@@ -57,6 +57,7 @@ class User < ActiveRecord::Base
     exp = 0
     submissions.where(:status => accepted).select(:problem_id).uniq.each { |submission| exp += submission.problem.exp }
     self.exp = exp
+    self.level = 0
     self.save
 
     self.level_up

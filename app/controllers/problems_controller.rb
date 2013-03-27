@@ -57,10 +57,15 @@ class ProblemsController < ApplicationController
 
   def update
     @problem.level = params[:problem][:level]
+    old_exp = @problem.exp
     @problem.exp = 1 << params[:problem][:exp].to_i
 
     if @problem.save
       Setting.update_exp
+      if @problem.exp != old_exp
+        accepted = OJ::StatusDict["Accepted"]
+        @problem.submissions.where(:status => accepted).select(:user_id).uniq.each { |submission| submission.user.add_exp(@problem.exp - old_exp) }
+      end
       redirect_to problem_path(@problem), :notice => "Problem was successfully updated."
     else
       flash[:alert] = "Failed to edit problem."
