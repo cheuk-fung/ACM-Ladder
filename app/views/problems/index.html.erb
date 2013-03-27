@@ -38,6 +38,15 @@
   <div class="pagination pagination-centered">
     <ul>
       <li class="disabled"><span>Level</span></li>
+      <% if can? :manage, :all %>
+      <% if -1 == @current_level %>
+        <li class="active"><span>Hidden</span></li>
+      <% else %>
+        <li>
+        <a href="<%= "#{problems_path}?level=-1" %>">Hidden</a>
+        </li>
+      <% end %>
+      <% end %>
       <% ([@user_level, get_max_level].min + 1).times do |l| %>
         <% if l == @current_level %>
           <li class="active"><span><%= l %></span></li>
