@@ -5,7 +5,7 @@ class Setting < ActiveRecord::Base
     max_level = Setting.find_by_key("MAX_LEVEL").value.to_i
     (max_level + 1).times { |level|
       Setting.find_by_key("EXP_L#{level}") { |s|
-        s.value = Problem.where(:level => level).sum(:exp)
+        s.value = (Problem.where("`level` <= ?", level).sum(:exp) * 3.0 / 4).ceil
       }.save
     }
   end

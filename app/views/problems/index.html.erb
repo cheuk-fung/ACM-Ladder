@@ -12,6 +12,14 @@
     <%= button_to 'LEVEL UP!', user_level_up_path(current_user), :class => 'btn btn-success pull-right' %>
   <% end %>
   <h2>Level <%= @current_level %></h2>
+  <% if user_signed_in? && @current_level == current_user.level %>
+    <div class="progress">
+      <div class="bar" style="width: <%= current_user.exp * 100.0 / get_level_exp(current_user.level) %>%;">
+        <%= current_user.exp %>
+      </div>
+      <center><%= get_level_exp(current_user.level) - current_user.exp %></center>
+    </div>
+  <% end %>
   <table class="table table-striped table-hover">
     <thead>
       <tr>
@@ -29,7 +37,7 @@
             <span class="badge badge-success"><%= problem.original_id %></span>
           </td>
           <td><%= link_to problem.title, problem %></td>
-          <td class="text-error"><center><strong><%= problem.exp %><strong></center></td>
+          <td class="text-error"><center><strong><%= problem.exp %></strong></center></td>
           <td><center><%= show_problem_status(@status[problem.id]) %></center></td>
         </tr>
       <% end %>
