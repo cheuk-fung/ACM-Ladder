@@ -8,8 +8,10 @@ class ProblemsController < ApplicationController
     begin
       @current_level = Integer(params[:level])
       if @current_level < 0
-        flash[:alert] = "Kidding? The level you tell me is negative!"
-        @current_level = @user_level
+        if !(@current_level == -1 && current_user.has_role?(:admin))
+          flash[:alert] = "Kidding? The level you tell me is negative!"
+          @current_level = @user_level
+        end
       elsif @current_level > max_level && @user_level > max_level
         @congratulations = true
       elsif @current_level > @user_level
