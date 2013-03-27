@@ -24,6 +24,9 @@
         <th>Title</th>
         <th class="span1">EXP.</th>
         <th class="span1">Status</th>
+        <% if can? :manage, :all %>
+        <th class="span1">Manage</th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
@@ -36,6 +39,9 @@
           <td><%= link_to problem.title, problem %></td>
           <td class="text-error"><center><strong><%= problem.exp %></strong></center></td>
           <td><center><%= show_problem_status(@status[problem.id]) %></center></td>
+          <% if can? :manage, :all %>
+          <td><center><%= link_to "Edit", edit_problem_path(problem) %></center></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
@@ -43,6 +49,15 @@
   <div class="pagination pagination-centered">
     <ul>
       <li class="disabled"><span>Level</span></li>
+      <% if can? :manage, :all %>
+      <% if -1 == @current_level %>
+        <li class="active"><span>Hidden</span></li>
+      <% else %>
+        <li>
+        <a href="<%= "#{problems_path}?level=-1" %>">Hidden</a>
+        </li>
+      <% end %>
+      <% end %>
       <% ([@user_level, get_max_level].min + 1).times do |l| %>
         <% if l == @current_level %>
           <li class="active"><span><%= l %></span></li>
