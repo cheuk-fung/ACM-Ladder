@@ -1,40 +1,40 @@
 <% content_for :title do %>
   <% "Submit Problem #{@problem.id}" %>
 <% end %>
+<h4>Submit Problem <%= @problem.id %> - <%= @problem.title %></h4>
+<table class="table">
+  <tbody>
+    <tr>
+      <td>
+        <strong>Source</strong>
+      </td>
+      <td class="text-info">
+        <%= "#{@problem.source} #{@problem.original_id}" %>
+      </td>
+      <td>
+        <strong>EXP.</strong>
+      </td>
+      <td class="text-success">
+        <strong><%= @problem.exp %></strong>
+      </td>
+      <td>
+        <strong>Time Limit</strong>
+      </td>
+      <td class="text-warning">
+        <%= @problem.time_limit %>MS
+      </td>
+      <td>
+        <strong>Memory Limit</strong>
+      </td>
+      <td class="text-warning">
+        <%= @problem.memory_limit %>KB
+      </td>
+    </tr>
+  </tbody>
+</table>
 <%= simple_form_for [@problem, @submission] do |form| %>
   <fieldset>
-    <h4>Submit Problem <%= @problem.id %> - <%= @problem.title %></h4>
-    <table class="table">
-      <tbody>
-        <tr>
-          <td>
-            <strong>Source</strong>
-          </td>
-          <td class="text-info">
-            <%= "#{@problem.source} #{@problem.original_id}" %>
-          </td>
-          <td>
-            <strong>EXP.</strong>
-          </td>
-          <td class="text-success">
-            <strong><%= @problem.exp %></strong>
-          </td>
-          <td>
-            <strong>Time Limit</strong>
-          </td>
-          <td class="text-warning">
-            <%= @problem.time_limit %>MS
-          </td>
-          <td>
-            <strong>Memory Limit</strong>
-          </td>
-          <td class="text-warning">
-            <%= @problem.memory_limit %>KB
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <%= form.input :language, :collection => OJ.language_collection(@problem), :selected => session[:lang] %>
+    <%= form.input :language, :as => :radio_buttons, :item_wrapper_class => "inline", :collection => OJ.language_collection(@problem), :selected => session[:lang] %>
     <%= form.input :code, :input_html => { :class => "span8" } %>
   </fieldset>
   <div class="form-actions">
