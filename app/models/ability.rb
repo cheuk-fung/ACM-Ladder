@@ -7,11 +7,12 @@ class Ability
       can :manage, :all
     elsif user.has_role?(:user)
       can :read, :all
-      can [:create, :compile_error, :show_code], Submission
-      can :level_up, User
+      cannot :show, Setting
+
+      can :create, Submission
     else
       can :read, :all
-      cannot :show, Submission
+      cannot :show, [Submission, Setting]
     end
   end
 end

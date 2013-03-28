@@ -37,16 +37,30 @@ class User < ActiveRecord::Base
     end
   end
 
+  def add_exp(exp)
+    self.exp += exp
+    self.save
+  end
+
   def level_up
-    accepted = OJ::StatusDict["Accepted"]
-    problem_count = Problem.where(:level => self.level).count
-    solved_count = submissions.joins(:problem).select('`problems`.`id`').where(:problems => { :level => self.level }, :status => accepted).count(:distinct => true)
-    if solved_count == problem_count
-      self.level += 1
+    max_level = Setting.find_by_key("MAX_LEVEL").value.to_i
+    level = self.level
+    level += 1 while level <= max_level && self.exp >= Setting.find_by_key("EXP_L#{level}").value.to_i
+    if level > self.level
+      self.level = level
       self.save
-    else
-      nil
     end
+  end
+
+  def recalc_exp
+    accepted = OJ::StatusDict["Accepted"]
+    exp = 0
+    submissions.where(:status => accepted).select(:problem_id).uniq.each { |submission| exp += submission.problem.exp }
+    self.exp = exp
+    self.level = 0
+    self.save
+
+    self.level_up
   end
 
   private

@@ -2,14 +2,17 @@ class ProblemsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @user_level = user_signed_in? ? (current_user.has_role?(:admin) ? Integer(ENV['MAX_LEVEL']) : current_user.level) : 0
+    max_level = Setting.find_by_key("MAX_LEVEL").value.to_i
+    @user_level = user_signed_in? ? (current_user.has_role?(:admin) ? max_level : current_user.level) : 0
     params[:level] ||= @user_level
     begin
       @current_level = Integer(params[:level])
       if @current_level < 0
-        flash[:alert] = "Kidding? The level you tell me is negative!"
-        @current_level = @user_level
-      elsif @current_level > Integer(ENV['MAX_LEVEL']) && @user_level > Integer(ENV['MAX_LEVEL'])
+        if !(@current_level == -1 && current_user.has_role?(:admin))
+          flash[:alert] = "Kidding? The level you tell me is negative!"
+          @current_level = @user_level
+        end
+      elsif @current_level > max_level && @user_level > max_level
         @congratulations = true
       elsif @current_level > @user_level
         flash[:alert] = "Oops, you haven't reach level #{@current_level} yet...."
@@ -24,15 +27,11 @@ class ProblemsController < ApplicationController
     @status = []
     if user_signed_in?
       accepted = OJ::StatusDict["Accepted"]
-      accepted_status = current_user.submissions.select(:problem_id).uniq.where(:problem_id => @problems, :status => accepted)
+      accepted_status = current_user.submissions.where(:problem_id => @problems, :status => accepted).select(:problem_id).uniq
       accepted_status.each { |submission| @status[submission.problem_id] = :accepted }
-      if @current_level == current_user.level && accepted_status.length == @problems.length
-        @level_up = true
-      else
-        opened_status = current_user.submissions.select(:problem_id).uniq.where(:problem_id => @problems)
-        opened_status.each { |submission|  @status[submission.problem_id] ||= :failed }
-        @problems.each { |problem| @status[problem.id] ||= :unopened }
-      end
+      opened_status = current_user.submissions.where(:problem_id => @problems).select(:problem_id).uniq
+      opened_status.each { |submission| @status[submission.problem_id] ||= :failed }
+      @problems.each { |problem| @status[problem.id] ||= :unopened }
     end
   end
 
@@ -40,9 +39,11 @@ class ProblemsController < ApplicationController
   end
 
   def create
+    @problem.exp = 1 << @problem.exp
     OJ.fetch(@problem)
 
     if @problem.save
+      Setting.update_exp
       redirect_to problem_path(@problem), :notice => "Problem was successfully created."
     else
       flash[:alert] = "Failed to create problem."
@@ -51,12 +52,20 @@ class ProblemsController < ApplicationController
   end
 
   def edit
+    @problem.exp = Integer(Math.log2(@problem.exp))
   end
 
   def update
     @problem.level = params[:problem][:level]
+    old_exp = @problem.exp
+    @problem.exp = 1 << params[:problem][:exp].to_i
 
     if @problem.save
+      Setting.update_exp
+      if @problem.exp != old_exp
+        accepted = OJ::StatusDict["Accepted"]
+        @problem.submissions.where(:status => accepted).select(:user_id).uniq.each { |submission| submission.user.add_exp(@problem.exp - old_exp) }
+      end
       redirect_to problem_path(@problem), :notice => "Problem was successfully updated."
     else
       flash[:alert] = "Failed to edit problem."

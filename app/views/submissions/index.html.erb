@@ -16,7 +16,7 @@
   <tbody>
     <% @submissions.each do |submission| %>
       <tr>
-        <td><%= submission.id %></td>
+        <td><strong><%= submission.id %></strong></td>
         <td><%= link_to submission.user.handle, user_path(submission.user) %></td>
         <td>
           <div class="problem-label">
