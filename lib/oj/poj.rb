@@ -7,14 +7,23 @@ module POJ
   Handle = ENV['POJ_HANDLE']
   Password = ENV['POJ_PASSWORD']
 
-  lid = OJ::LanguageID
-  LanguageDict = { "C (gcc)" => lid[:c], "C++ (g++)" => lid[:cpp], "Java (jdk6)" => lid[:java], "Pascal (fpc)" => lid[:pascal] }
-  LanguageSubmitID = { lid[:cpp] => 0, lid[:c] => 1, lid[:java] => 2, lid[:pascal] => 3 }
+  LangCollection = {
+    "C (gcc)"		=> OJ::LangSymToID[:c],
+    "C++ (g++)"		=> OJ::LangSymToID[:cpp],
+    "Java (jdk6)"	=> OJ::LangSymToID[:java],
+    "Pascal (fpc)"	=> OJ::LangSymToID[:pascal]
+  }
+  LangSubmitID = {
+    OJ::LangSymToID[:c]		=> 1,
+    OJ::LangSymToID[:cpp]	=> 0,
+    OJ::LangSymToID[:java]	=> 2,
+    OJ::LangSymToID[:pascal]	=> 3
+  }
 
   class << self
     def submit(submission)
       uri = URI(BaseURL)
-      language = LanguageSubmitID[submission.language]
+      language = LangSubmitID[submission.language]
       Net::HTTP.start(uri.host, uri.port) do |http|
         uri = URI("#{BaseURL}/login")
         request = Net::HTTP::Post.new(uri.request_uri)

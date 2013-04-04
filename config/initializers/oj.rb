@@ -1,10 +1,16 @@
 module OJ
   SourceList = ["POJ", "NKOJ"]
 
-  LanguageID = { :c => 0, :cpp => 1, :java => 2, :pascal => 3 }
-  LanguageSymbol = LanguageID.invert
-  lid = LanguageID
-  LanguageName = { lid[:c] => "C", lid[:cpp] => "C++", lid[:java] => "Java", lid[:pascal] => "Pascal" }
+  LangSymToID = { :c => 0, :cpp => 1, :java => 2, :pascal => 3 }
+  LangIDToSym = LangSymToID.invert
+  LangSymToName = { :c => "C", :cpp => "C++", :java => "Java", :pascal => "Pascal" }
+  LangNameToSym = LangSymToName.invert
+  LangIDToName = {
+    LangSymToID[:c]	=> LangSymToName[:c],
+    LangSymToID[:cpp]	=> LangSymToName[:cpp],
+    LangSymToID[:java]	=> LangSymToName[:java],
+    LangSymToID[:pascal]=> LangSymToName[:pascal]
+  }
 
   StatusSymToID = {
     :wait	=> 0,
@@ -87,14 +93,14 @@ module OJ
         current_user.level_up
       end
     end
-    # handle_asynchronously :submit, :queue => "submit"
+    handle_asynchronously :submit, :queue => "submit"
 
     def language_collection(problem)
       case problem.source
       when "POJ"
-        POJ::LanguageDict
+        POJ::LangCollection
       when "NKOJ"
-        NKOJ::LanguageDict
+        NKOJ::LangCollection
       end
     end
   end

@@ -7,14 +7,23 @@ module NKOJ
   Handle = ENV['NKOJ_HANDLE']
   Password = ENV['NKOJ_PASSWORD']
 
-  lid = OJ::LanguageID
-  LanguageDict = { "C (gcc)" => lid[:c], "C++ (g++)" => lid[:cpp], "Java (jdk6)" => lid[:java], "Pascal (fpc)" => lid[:pascal] }
-  LanguageSubmitID = { lid[:c] => 0, lid[:cpp] => 1, lid[:java] => 3, lid[:pascal] => 2 }
+  LangCollection = {
+    "C (gcc)"		=> OJ::LangSymToID[:c],
+    "C++ (g++)"		=> OJ::LangSymToID[:cpp],
+    "Java (jdk6)"	=> OJ::LangSymToID[:java],
+    "Pascal (fpc)"	=> OJ::LangSymToID[:pascal]
+  }
+  LangSubmitID = {
+    OJ::LangSymToID[:c]		=> 0,
+    OJ::LangSymToID[:cpp]	=> 1,
+    OJ::LangSymToID[:java]	=> 3,
+    OJ::LangSymToID[:pascal]	=> 2
+  }
 
   class << self
     def submit(submission)
       uri = URI(BaseURL)
-      language = LanguageSubmitID[submission.language]
+      language = LangSubmitID[submission.language]
       Net::HTTP.start(uri.host, uri.port) do |http|
         uri = URI("#{BaseURL}/login.php")
         request = Net::HTTP::Post.new(uri.request_uri)

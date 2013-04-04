@@ -30,7 +30,7 @@
           <%= status %>
         </span>
       </td>
-      <td><%= OJ::LanguageName[@submission.language] %></td>
+      <td><%= OJ::LangIDToName[@submission.language] %></td>
       <td><%= @submission.created_at.localtime.to_s(:db) %></td>
     </tr>
   </tbody>
@@ -38,4 +38,4 @@
 <% if status == "Compile Error" %>
  <pre><%= @submission.error.html_safe %></pre>
 <% end %>
-<%= CodeRay.scan(@submission.code, OJ::LanguageSymbol[@submission.language]).div.html_safe %>
+<%= CodeRay.scan(@submission.code, OJ::LangIDToSym[@submission.language]).div.html_safe %>
