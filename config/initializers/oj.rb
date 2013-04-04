@@ -3,26 +3,57 @@ module OJ
 
   LanguageID = { :c => 0, :cpp => 1, :java => 2, :pascal => 3 }
   LanguageSymbol = LanguageID.invert
-
   lid = LanguageID
   LanguageName = { lid[:c] => "C", lid[:cpp] => "C++", lid[:java] => "Java", lid[:pascal] => "Pascal" }
 
-  StatusDict = {
-    "Waiting"			=> 0,
-    "Compiling"			=> 1,
-    "Running"			=> 2,
-    "Accepted"			=> 3,
-    "Presentation Error"	=> 4,
-    "Time Limit Exceeded"	=> 5,
-    "Memory Limit Exceeded"	=> 6,
-    "Wrong Answer"		=> 7,
-    "Runtime Error"		=> 8,
-    "Output Limit Exceeded"	=> 9,
-    "Function Limit Exceeded"	=> 10,
-    "Compile Error"		=> 11,
-    "System Error"		=> 12
+  StatusSymToID = {
+    :wait	=> 0,
+    :comp	=> 1,
+    :run	=> 2,
+    :ac		=> 3,
+    :pe		=> 4,
+    :tle	=> 5,
+    :mle	=> 6,
+    :wa		=> 7,
+    :re		=> 8,
+    :ole	=> 9,
+    :fle	=> 10,
+    :ce		=> 11,
+    :se		=> 12
   }
-  StatusName = StatusDict.invert
+  StatusIDToSym = StatusSymToID.invert
+  StatusSymToName = {
+    :wait	=> "Waiting",
+    :comp	=> "Compiling",
+    :run	=> "Running",
+    :ac		=> "Accepted",
+    :pe		=> "Presentation Error",
+    :tle	=> "Time Limit Exceeded",
+    :mle	=> "Memory Limit Exceeded",
+    :wa		=> "Wrong Answer",
+    :re		=> "Runtime Error",
+    :ole	=> "Output Limit Exceeded",
+    :fle	=> "Function Limit Exceeded",
+    :ce		=> "Compile Error",
+    :se		=> "System Error"
+  }
+  StatusNameToSym = StatusSymToName.invert
+  StatusIDToName = {
+    StatusSymToID[:wait]	=> StatusSymToName[:wait],
+    StatusSymToID[:comp]	=> StatusSymToName[:comp],
+    StatusSymToID[:run]		=> StatusSymToName[:run],
+    StatusSymToID[:ac]		=> StatusSymToName[:ac],
+    StatusSymToID[:pe]		=> StatusSymToName[:pe],
+    StatusSymToID[:tle]		=> StatusSymToName[:tle],
+    StatusSymToID[:mle]		=> StatusSymToName[:mle],
+    StatusSymToID[:wa]		=> StatusSymToName[:wa],
+    StatusSymToID[:re]		=> StatusSymToName[:re],
+    StatusSymToID[:ole]		=> StatusSymToName[:ole],
+    StatusSymToID[:fle]		=> StatusSymToName[:fle],
+    StatusSymToID[:ce]		=> StatusSymToName[:ce],
+    StatusSymToID[:se]		=> StatusSymToName[:se]
+  }
+  StatusNameToID = StatusIDToName.invert
 
   class << self
     def fetch(problem)
@@ -49,14 +80,14 @@ module OJ
       end
 
       current_user = submission.user
-      accepted = StatusDict["Accepted"]
+      accepted = StatusSymToID[:ac]
       count = current_user.submissions.where(:problem_id => submission.problem, :status => accepted).count
       if submission.status == accepted && count == 1
         current_user.add_exp(submission.problem.exp)
         current_user.level_up
       end
     end
-    handle_asynchronously :submit, :queue => "submit"
+    # handle_asynchronously :submit, :queue => "submit"
 
     def language_collection(problem)
       case problem.source

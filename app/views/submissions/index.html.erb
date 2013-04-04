@@ -26,7 +26,7 @@
           </div>
         </td>
         <td>
-          <% status = OJ::StatusName[submission.status] %>
+          <% status = OJ::StatusIDToName[submission.status] %>
           <% if user_signed_in? && (current_user.has_role?(:admin) || submission.user_id == current_user.id) && status == "Compile Error" %>
             <%= link_to "Compile Error", submission_path(submission), :class => "btn btn-warning btn-mini" %>
           <% else %>

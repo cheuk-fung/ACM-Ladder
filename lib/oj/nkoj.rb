@@ -52,11 +52,12 @@ module NKOJ
         else
           status = result[1].at("span").inner_html
         end
-        submission.status = OJ::StatusDict[status]
-        if status == "Accepted"
+        status = OJ::StatusNameToSym[status]
+        submission.status = OJ::StatusSymToID[status]
+        if status == :ac
           submission.memory = result[2].inner_html[/\d+ KB/][/\d+/]
           submission.time = result[2].inner_html[/\d+ ms/][/\d+/]
-        elsif status == "Compile Error"
+        elsif status == :ce
           uri = URI("#{BaseURL}/user_cmpinfo.php?id=#{submission.original_id}")
           request = Net::HTTP::Get.new(uri.request_uri)
           request['Cookie'] = cookies

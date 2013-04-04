@@ -25,7 +25,7 @@
         </div>
       </td>
       <td>
-        <% status = OJ::StatusName[@submission.status] %>
+        <% status = OJ::StatusIDToName[@submission.status] %>
         <span class="label label-<%= get_submission_status(status) %>">
           <%= status %>
         </span>

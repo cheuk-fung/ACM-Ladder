@@ -8,7 +8,6 @@ Features
 - 站内信息
 - Ranking List
 - OJ 模块进一步抽象
-- status 使用 symbol（跟 language 类似）
 - 支持更多 OJ
 - POJ/NKOJ 模块中加入异常处理
 - 在 Submission Detail 页面中加入 quick edit 的链接，重定向至预填充此次提交信息的 submit 页面

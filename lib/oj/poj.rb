@@ -34,19 +34,20 @@ module POJ
       sleep 1
 
       submission.original_id = nil	# for rejudge
-      submission.status = 0		# for rejudge
-      while submission.status <= 2	# waiting, compiling or running
+      status = :wait
+      while [:wait, :comp, :run].include?(status)
         doc = Hpricot(open("#{BaseURL}/status?problem_id=#{submission.problem.original_id}&user_id=#{Handle}"))
         result = doc.search("table")[4].search("tr")[1].search("td")
 
         submission.original_id ||= result[0].inner_html
 
         status = result[3].at("font").inner_html
-        submission.status = OJ::StatusDict[status =~ /Running/ ? "Running" : status]
-        if status == "Accepted"
+        status = OJ::StatusNameToSym[status =~ /Running/ ? "Running" : status]
+        submission.status = OJ::StatusSymToID[status]
+        if status == :ac
           submission.memory = result[4].inner_html[/\d+/]
           submission.time = result[5].inner_html[/\d+/]
-        elsif status == "Compile Error"
+        elsif status == :ce
           doc = Hpricot(open("#{BaseURL}/showcompileinfo?solution_id=#{submission.original_id}"))
           submission.error = doc.at("pre").inner_html
         end

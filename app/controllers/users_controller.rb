@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource :find_by => :handle
 
   def show
-    @solved = @user.submissions.where(:status => OJ::StatusDict["Accepted"]).uniq.pluck(:problem_id)
+    @solved = @user.submissions.where(:status => OJ::StatusSymToID[:ac]).uniq.pluck(:problem_id)
     if @solved.empty?
       @failed = @user.submissions.select(:problem_id).uniq.pluck(:problem_id)
     else

@@ -15,9 +15,17 @@ class SubmissionsController < ApplicationController
     end
     if params[:user_id]
       user = User.find_by_handle(params[:user_id])
-      @submissions = user.submissions.joins(:problem).where("`problems`.`level` != -1").offset((@current_page - 1) * 10).last(10).reverse
+      if user_signed_in? && current_user.has_role?(:admin)
+        @submissions = user.submissions.offset((@current_page - 1) * 10).last(10).reverse
+      else
+        @submissions = user.submissions.joins(:problem).where("`problems`.`level` != -1").offset((@current_page - 1) * 10).last(10).reverse
+      end
     else
-      @submissions = Submission.joins(:problem).where("`problems`.`level` != -1").offset((@current_page - 1) * 10).last(10).reverse
+      if user_signed_in? && current_user.has_role?(:admin)
+        @submissions = Submission.offset((@current_page - 1) * 10).last(10).reverse
+      else
+        @submissions = Submission.joins(:problem).where("`problems`.`level` != -1").offset((@current_page - 1) * 10).last(10).reverse
+      end
     end
   end
 

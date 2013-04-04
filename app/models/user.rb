@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   end
 
   def recalc_exp
-    accepted = OJ::StatusDict["Accepted"]
+    accepted = OJ::StatusSymToID[:ac]
     exp = 0
     submissions.where(:status => accepted).select(:problem_id).uniq.each { |submission| exp += submission.problem.exp }
     self.exp = exp
