@@ -13,7 +13,7 @@ Features
 
 UI
 --
-- submit 页面使用 bootstrap 的 [modal](http://twitter.github.com/bootstrap/javascript.html#modals) 直接在 problem 页面显示 (or ajax?)
-- submit 页面中的代码框使用等宽字体，或者替换成在线代码编辑器
+- submit-modal 使用 ajax？
+- submit 使用在线代码编辑器？
 - UI 上的改进，或重新设计
 - 设计 404 页面
