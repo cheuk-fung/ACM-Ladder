@@ -49,6 +49,25 @@
 
 <div class="form-actions">
   <center>
-    <%= link_to "Submit", problem_submit_path(@problem), :class => "btn btn-primary" %>
+    <a href="#submitBox" role="button" class="btn btn-primary" data-toggle="modal">Submit</a>
   </center>
+</div>
+
+<div id="submitBox" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="submitLabel" aria-hidden="true">
+<%= simple_form_for [@problem, @submission], :html => {:style => "margin:0px"} do |form| %>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="submitLabel">Submit your code</h3>
+  </div>
+  <div class="modal-body">
+      <fieldset>
+        <%= form.input :language, :as => :radio_buttons, :item_wrapper_class => "inline", :collection => OJ.language_collection(@problem), :selected => session[:lang] %>
+        <%= form.input :code, :input_html => { :style => "width:96%", :rows => 10} %>
+      </fieldset>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <%= form.submit "Submit", :class => "btn btn-primary" %>
+  </div>
+<% end %>
 </div>

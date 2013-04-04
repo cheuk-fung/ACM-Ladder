@@ -78,5 +78,7 @@ class ProblemsController < ApplicationController
     if user_level < @problem.level
       redirect_to problems_path, :alert => "Oops, you are not powerful enough to view this problem...."
     end
+    @submission = Submission.new
+    @submission.language = session[:lang]
   end
 end
