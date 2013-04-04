@@ -39,3 +39,11 @@
  <pre><%= @submission.error.html_safe %></pre>
 <% end %>
 <%= CodeRay.scan(@submission.code, OJ::LangIDToSym[@submission.language]).div.html_safe %>
+
+<div class="form-actions">
+  <center>
+    <%= link_to "Quick Edit", "#submit_modal", :role => "button", :class => "btn btn-primary", :data => { :toggle => "modal" } %>
+  </center>
+</div>
+
+<%= render 'layouts/submit-modal' %>

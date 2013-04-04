@@ -49,9 +49,15 @@ class SubmissionsController < ApplicationController
     end
   end
 
+  def update
+    @submission = Submission.new(params[:submission])
+    create
+  end
+
   def show
     if @submission.user_id != current_user.id && !current_user.has_role?(:admin)
       redirect_to submissions_path, :alert => "It's not for you..."
     end
+    @problem = @submission.problem
   end
 end

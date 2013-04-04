@@ -1,4 +1,4 @@
-<%= simple_form_for :setting, :method => 'put', :html => { :class => "form-horizontal" } do |form| %>
+<%= simple_form_for :setting, :method => "put", :html => { :class => "form-horizontal" } do |form| %>
   <fieldset>
     <legend>Site Settings</legend>
     <%= form.input :max_level, :label => "Max Level", :as => :integer, :required => false, :placeholder => get_max_level.to_s %>
