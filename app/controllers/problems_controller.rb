@@ -22,7 +22,7 @@ class ProblemsController < ApplicationController
       flash[:alert] = "Kidding? The level you tell me is not a number!"
       @current_level = @user_level
     end
-    @problems = Problem.where(:level => @current_level).all
+    @problems = Problem.where(:level => @current_level)
 
     @status = []
     if user_signed_in?

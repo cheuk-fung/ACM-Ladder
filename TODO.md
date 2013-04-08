@@ -6,7 +6,6 @@ Features
 - 勋章系统
 - 任务机制（每一级有必做题）
 - 站内信息
-- Ranking List
 - OJ 模块进一步抽象
 - 支持更多 OJ
 - POJ/NKOJ 模块中加入异常处理

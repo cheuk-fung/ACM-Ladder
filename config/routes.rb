@@ -14,6 +14,7 @@ ACMLadder::Application.routes.draw do
   resources :users, :only => [:index, :show] do
     resources :submissions, :only => :index
   end
+  post '/users' => 'users#index'
 
   resources :problems, :except => :destroy do
     resources :submissions, :only => [:create, :update]
