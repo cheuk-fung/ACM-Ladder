@@ -1,6 +1,4 @@
 ACMLadder::Application.routes.draw do
-  get 'home/index'
-
   resource :setting, :only => [:edit, :update], :path_names => { :edit => '' }
 
   devise_for :users, :path => 'u', :skip => :registrations
@@ -13,16 +11,16 @@ ACMLadder::Application.routes.draw do
              :as => :user_registration
   end
 
-  resources :users do
-    resources :submissions
+  resources :users, :only => [:index, :show] do
+    resources :submissions, :only => :index
   end
 
-  resources :problems do
-    resources :submissions
+  resources :problems, :except => :destroy do
+    resources :submissions, :only => [:create, :update]
     get 'submit' => 'submissions#new'
   end
 
-  resources :submissions
+  resources :submissions, :only => [:index, :show]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
