@@ -25,9 +25,8 @@
         </div>
       </td>
       <td>
-        <% status = OJ::StatusIDToName[@submission.status] %>
-        <span class="label label-<%= get_submission_status(status) %>">
-          <%= status %>
+        <span class="label label-<%= get_submission_status(OJ::StatusIDToSym[@submission.status]) %>">
+          <%= OJ::StatusIDToName[@submission.status] %>
         </span>
       </td>
       <td><%= OJ::LangIDToName[@submission.language] %></td>
@@ -35,14 +34,14 @@
     </tr>
   </tbody>
 </table>
-<% if status == "Compile Error" %>
+<% if OJ::StatusIDToSym[@submission.status] == :ce %>
  <pre><%= @submission.error.html_safe %></pre>
 <% end %>
 <%= CodeRay.scan(@submission.code, OJ::LangIDToSym[@submission.language]).div.html_safe %>
 
 <div class="form-actions">
   <center>
-    <%= link_to "Quick Edit", "#submit_modal", :role => "button", :class => "btn btn-primary", :data => { :toggle => "modal" } %>
+    <%= link_to "Quick Edit", "#submit-modal", :role => "button", :class => "btn btn-primary", :data => { :toggle => "modal" } %>
   </center>
 </div>
 

@@ -16,7 +16,13 @@
   <tbody>
     <% @submissions.each do |submission| %>
       <tr>
-        <td><strong><%= submission.id %></strong></td>
+        <td><strong>
+            <% if user_signed_in? && (current_user.has_role?(:admin) || submission.user_id == current_user.id) %>
+              <%= link_to submission.id, submission_path(submission) %>
+            <% else %>
+              <%= submission.id %>
+            <% end %>
+        </strong></td>
         <td><%= link_to submission.user.handle, user_path(submission.user) %></td>
         <td>
           <div class="problem-label">
@@ -26,12 +32,11 @@
           </div>
         </td>
         <td>
-          <% status = OJ::StatusIDToName[submission.status] %>
-          <% if user_signed_in? && (current_user.has_role?(:admin) || submission.user_id == current_user.id) && status == "Compile Error" %>
-            <%= link_to "Compile Error", submission_path(submission), :class => "btn btn-warning btn-mini" %>
+          <% if user_signed_in? && (current_user.has_role?(:admin) || submission.user_id == current_user.id) && OJ::StatusIDToSym[submission.status] == :ce %>
+            <%= link_to OJ::StatusIDToName[submission.status], submission_path(submission), :class => "btn btn-warning btn-mini" %>
           <% else %>
-            <span class="label label-<%= get_submission_status(status) %>">
-              <%= status %>
+            <span class="label label-<%= get_submission_status(OJ::StatusIDToSym[submission.status]) %>">
+              <%= OJ::StatusIDToName[submission.status] %>
             </span>
           <% end %>
         </td>
