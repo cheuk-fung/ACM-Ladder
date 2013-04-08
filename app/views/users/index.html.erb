@@ -2,7 +2,7 @@
   <% "Rankings" %>
 <% end %>
 <%= simple_form_for :rankings, :html => { :class => "form-inline pull-right", :style => "margin:1em 0 0 0" }, :method => "post" do |form| %>
-  <%= form.input :toggle_finished, :label => false, :inline_label => "show finished", :as => :boolean, :input_html => { :onchange => "form.submit()", :checked => params[:rankings] && params[:rankings][:toggle_finished] == '1' } %>
+  <%= form.input :toggle_finished, :label => false, :inline_label => "show finished", :as => :boolean, :input_html => { :onchange => "form.submit()", :checked => session[:rankings] == 1 } %>
 <% end %>
 <h2>Rankings</h2>
 <table class="table table-striped table-hover">
