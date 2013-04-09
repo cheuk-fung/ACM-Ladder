@@ -10,7 +10,6 @@ Features
 - 支持更多 OJ
 - POJ/NKOJ 模块中加入异常处理
 - Congratulation page
-- user 资料中，学校分为南开以及其它
 
 UI
 --
