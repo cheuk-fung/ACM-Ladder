@@ -9,6 +9,7 @@ Features
 - OJ 模块进一步抽象
 - 支持更多 OJ
 - POJ/NKOJ 模块中加入异常处理
+- Congratulation page
 
 UI
 --
