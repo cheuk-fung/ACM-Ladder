@@ -20,7 +20,7 @@
     </li>
   <% end %>
   <li class="<%= 'active' if params[:controller] == 'users' && params[:action] == 'index' %>">
-  <%= link_to 'Rankings', users_path %>
+  <%= link_to 'Ranking', users_path %>
   </li>
   <% if can? :manage, :all %>
     <li class="dropdown">

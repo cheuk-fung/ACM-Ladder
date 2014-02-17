@@ -14,10 +14,10 @@ class UsersController < ApplicationController
       @current_page = 1
     end
 
-    session[:rankings] ||= {}
-    session[:rankings][:toggle_finished] ||= 0
-    session[:rankings][:toggle_finished] = params[:rankings][:toggle_finished].to_i if params[:rankings]
-    @users = User.where(:level => 0..Setting.find_by_key("MAX_LEVEL").value.to_i) if session[:rankings][:toggle_finished] == 0
+    session[:ranking] ||= {}
+    session[:ranking][:toggle_finished] ||= 0
+    session[:ranking][:toggle_finished] = params[:ranking][:toggle_finished].to_i if params[:ranking]
+    @users = User.where(:level => 0..Setting.find_by_key("MAX_LEVEL").value.to_i) if session[:ranking][:toggle_finished] == 0
     @submitted = {}
     @users.each { |user| @submitted[user] = user.submissions.count }
     @users.sort! do |x, y|

@@ -12,7 +12,7 @@
   <% if user_signed_in? && @current_level == current_user.level %>
     <div class="progress">
       <div class="bar" style="width: <%= current_user.exp * 100.0 / get_level_exp(current_user.level) %>%;">
-        <%= current_user.exp %>
+        <%= current_user.exp if current_user.exp > 0 %>
       </div>
       <center><%= get_level_exp(current_user.level) - current_user.exp %></center>
     </div>
