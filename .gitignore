@@ -20,6 +20,9 @@
 # Ignore personal database configuration file.
 /config/database.yml
 
+# Ignore secret token.
+/config/initializers/secret_token.rb
+
 # Ignore personal unicorn configuration file.
 /config/unicorn.rb
 

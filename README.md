@@ -30,7 +30,8 @@ Getting Started[Rough Version]
 
         rake secret
 
-2. Modify `config/initializers/secret_token.rb` to replace the old token to the new one.
+2. Modify `config/initializers/secret_token.rb.example` to set the token and
+   save it to `config/initializers/secret_token.rb`.
 
 ### Configure
 
