@@ -17,3 +17,7 @@ UI
 - submit 使用在线代码编辑器？
 - UI 上的改进，或重新设计
 - 设计 404 页面
+
+Bugs
+----
+- http://acm.nankai.edu.cn/ladder/users/sam.gong
