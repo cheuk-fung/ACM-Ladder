@@ -57,7 +57,7 @@ Getting Started[Rough Version]
 
     script/delayed_job start
 
-### Enjoy!
+### Start rails and enjoy!
 
 License
 -------
